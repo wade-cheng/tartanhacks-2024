@@ -11,6 +11,7 @@ PLAYER_MOVE_EVENT = pygame.USEREVENT + 2
 class GameState:
     """holds the state of the game.
     when adding parameters, include a default value
+    
     so previous code doesn't break"""
     def __init__(self, example_param: int=0) -> None:
         self.example_param = example_param
