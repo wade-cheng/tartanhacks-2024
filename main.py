@@ -39,11 +39,15 @@ def draw(screen: pygame.Surface, gamestate: GameState):
     """
     screen.fill(BG_COLOR)
 
-    pygame.display.update()
+    for hitcircle_loc in gamestate.rendered_hitcircle_locs:
+        screen.blit(gamestate.hitcircle, (hitcircle_loc, 40))
+        
 
+    pygame.display.update()
 
 def main():
     gamestate = GameState()
+    print(gamestate)
 
     pygame.init()
 
@@ -51,9 +55,12 @@ def main():
     fpsClock = pygame.time.Clock()
 
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT), flags=0, vsync=1)
+    pygame.display.set_caption("Goose Rhythm Game")
     # screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT), flags=pygame.SCALED, vsync=1)
     screen.fill(BG_COLOR)
     pygame.display.update()
+
+    #goose = pygame.image.load(), upload goose images to repo to pull
 
     dt = 1 / fps
     while gamestate.playing:
