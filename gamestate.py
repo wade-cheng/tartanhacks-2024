@@ -22,7 +22,7 @@ class GameState:
         
         # rendered_hitcircle_locs: a list of the x-positions of all the hitcircles to be rendered. can be off screen.
         self.rendered_hitcircles: list[Note] = []
-        self.map: Map = Map("maps/testcase_small")
+        self.map: Map = Map("maps/testcase_misty_mountains")
         self.startTime = time.time()
 
 

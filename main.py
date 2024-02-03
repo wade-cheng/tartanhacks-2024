@@ -101,18 +101,13 @@ def drawGoose(screen: pygame.Surface, gamestate: GameState): # draws the goose i
 
     screen.blit(imageToDisplay, (0, GOOSE_Y))  
 
-def playMusic(song):
-    pygame.mixer.quit
-    file_wav = wave.open(song)
-    #frequency = file_wav.getframerate()
-    pygame.mixer.init(frequency=120)
-    pygame.mixer.music.load(song)
-    pygame.mixer.music.play(1)
+def playMusic(sound: pygame.mixer.Sound):
+    pygame.mixer.find_channel().play(sound)
 
 def main():
     gamestate = GameState()
     print(gamestate)
-    playMusic("maps/testcase_small/quacking.wav")
+    playMusic(gamestate.map.audio)
 
     pygame.init()
     pygame.font.init()
