@@ -68,8 +68,12 @@ def drawGoose(screen: pygame.Surface, gamestate: GameState): # draws the goose i
 
     if gamestate.gooseSquashedBad:
         imageToDisplay = "assets/bad.png"
+        for i in range(4):
+            screen.blit(imageToDisplay, (10, 10)) 
     elif gamestate.gooseSquashedGood:
         imageToDisplay = "assets/good.png"
+        for i in range(4):
+            screen.blit(imageToDisplay, (10, 10)) 
     else:
         imageToDisplay = gamestate.gooseArray[gamestate.gooseIndex]
 
