@@ -78,6 +78,9 @@ class MapHolder:
     def get_selected_map(self) -> Map:
         return self.__map_list[self.__map_idx]
     
+    def select_prev (self) :
+        self.__map_idx = (self.__map_idx - 1) % len(self.__map_list)
+
     def select_next(self):
         self.__map_idx = (self.__map_idx + 1) % len(self.__map_list)
     
