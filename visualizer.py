@@ -1,4 +1,5 @@
 from constants import *
+from gamestate import GameState
 import pygame
 """
     # class Note:
@@ -23,17 +24,20 @@ class Map:
         file.readLine()
         self.bpm: int = file.readLine()
         self.audio: pygame.mixer.Sound = pygame.mixer.Sound(file.readLine())
-        self.notes: list[bool] = []
+        self.notes: list[bool] = file.readLine()
         
 
         file.close()
 
+# def notes_arr (notes: list[bool]):
+#     leng = len(notes)
+#     for i in range(notes):
         
 
 
-def notesstream(m : Map):
-    notes : list[bool] = m.notes.notes_arr 
 
+def notesstream(m : Map, gamestate: GameState):
+    notes : list[bool] = m.notes.notes_arr
     # sync current time to start idx instead of it always zero
     startIdx : int = 0
     #adding an extra 3 beats so notes don't spawn out immediately
