@@ -8,6 +8,8 @@ import numpy
 
 
 def get_closest_note(gamestate : GameState) -> Note :
+    if (len(gamestate.rendered_hitcircles) < 1):
+        return None
     minim = gamestate.rendered_hitcircles[0]
     for i in range (len(gamestate.rendered_hitcircles)):
         if (abs(SQUASHER_BAR_X - gamestate.rendered_hitcircles[i].x) < abs(SQUASHER_BAR_X - minim.x)):
@@ -27,7 +29,6 @@ def update(dt, gamestate: GameState):
     and this will scale your velocity based on time. Extend as necessary."""
 
     notesstream(gamestate)
-
     for event in pygame.event.get():
         if event.type == QUIT:
             gamestate.playing = False
@@ -36,15 +37,22 @@ def update(dt, gamestate: GameState):
         elif event.type == pygame.KEYDOWN:
             if event.key == pygame.K_SPACE:
                 closest = get_closest_note(gamestate)
+                if closest == None:
+                    break
                 # if the user misses completely
                 if (abs(closest.x - SQUASHER_BAR_X) > ACCURACY_BUFFER):
                     gamestate.combo = 0
+                    gamestate.gooseSquashedCounter = 0
+                    gamestate.gooseSquashedState = 2
                 else:
                     scaled_error = (closest.x - SQUASHER_BAR_X)/ACCURACY_BUFFER * numpy.pi # to fit the domain of cosine
                     score_scaling = 0.5 * (numpy.cos(scaled_error) + 1)
                     gamestate.score += score_scaling * (gamestate.combo + 1) * 1
                     gamestate.combo += score_scaling
                     closest.squashed = True
+                    gamestate.gooseSquashedCounter = 0
+                    gamestate.gooseSquashedState = 1
+
     
 
 def draw(screen: pygame.Surface, gamestate: GameState):
@@ -62,24 +70,27 @@ def draw(screen: pygame.Surface, gamestate: GameState):
     pygame.draw.line(screen, color=(0,0,0), start_pos=(SQUASHER_BAR_X, NOTESTREAM_Y - 20), end_pos=(SQUASHER_BAR_X, NOTESTREAM_Y + 60), width=10)
 
     pygame.display.update()
-    
-# def drawGooseGood(screen: pygame.Surface, gamestate: GameState):
-#     gamestate.gooseIndex = (gamestate.gooseIndex + 1) % len(gamestate.gooseArray)   
-#     imageToDisplay = "assets/squashgood.png"
-
-#     GOOSE_Y = NOTESTREAM_Y-Image.open("assets/squashgood.png").height
-#     screen.blit(imageToDisplay, (10, GOOSE_Y))  
 
 def drawGoose(screen: pygame.Surface, gamestate: GameState): # draws the goose in frames and includes user input
+    if gamestate.gooseSquashedCounter >= 10:
+        gamestate.gooseSquashedCounter = 0
+        gamestate.gooseSquashedState = 0
+
     if gamestate.gooseSquashedState == 1: # good
-        imageToDisplay = "assets/squashgood.png"
+        imageToDisplay = pygame.image.load("assets/squashgood.png")
+        gamestate.gooseSquashedCounter += 1
+
     elif gamestate.gooseSquashedState == 2: # bad
-        imageToDisplay = "assets/squashbad.png"
+        imageToDisplay = pygame.image.load("assets/squashbad.png")
+        gamestate.gooseSquashedCounter += 1
+
     else:
-        gamestate.gooseIndex = (gamestate.gooseIndex + 1) % len(gamestate.gooseArray)   
-        imageToDisplay = gamestate.gooseArray[gamestate.gooseIndex]
+        gamestate.gooseIndex += 1
+        gamestate.gooseIndex %= (len(gamestate.gooseArray) * 3)
+        imageToDisplay = gamestate.gooseArray[int(gamestate.gooseIndex/3)]
 
     GOOSE_Y = NOTESTREAM_Y-Image.open("assets/Waddle1.png").height
+
     screen.blit(imageToDisplay, (10, GOOSE_Y))  
 
 def main():

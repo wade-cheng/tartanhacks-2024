@@ -10,14 +10,16 @@ class GameState:
     
     def __init__(self) -> None:
         self.gooseIndex = 0
+        self.gooseSquashedState = 0
+        self.gooseSquashedCounter = 0
+        self.gooseArray = [pygame.image.load("assets/Waddle1.png"), pygame.image.load("assets/Waddle2.png"), pygame.image.load("assets/Waddle3.png"), pygame.image.load("assets/Waddle4.png")]
+        
         self.playing = True
-        self.gooseSquashedGood = True
-        self.gooseSquashedBad = False
         self.score = 0
         self.combo = 0
 
         self.background = pygame.image.load("assets/windows.png")
-        self.gooseArray = [pygame.image.load("assets/Waddle1.png"), pygame.image.load("assets/Waddle2.png"), pygame.image.load("assets/Waddle3.png"), pygame.image.load("assets/Waddle4.png")]
+        
         # rendered_hitcircle_locs: a list of the x-positions of all the hitcircles to be rendered. can be off screen.
         self.rendered_hitcircles: list[Note] = []
         self.map: Map = Map("maps/testcase_small")
