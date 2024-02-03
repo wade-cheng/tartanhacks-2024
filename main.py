@@ -172,6 +172,14 @@ def update_titlescreen(gamestate: GameState) -> None:
     for event in pygame.event.get():
         if event.type == QUIT:
             gamestate.playing = False
+        elif event.type == pygame.MOUSEBUTTONDOWN:
+            cursor_x, cursor_y = pygame.mouse.get_pos()
+            print(cursor_x, cursor_y)
+            print(gamestate.leftarrow.get_rect())
+            if gamestate.LARROW_RECT.collidepoint(cursor_x, cursor_y):
+                gamestate.maps.select_next()
+            if gamestate.RARROW_RECT.collidepoint(cursor_x, cursor_y):
+                gamestate.maps.select_next()
         elif event.type == pygame.KEYDOWN:
             gamestate.entered_map = True
 
@@ -180,12 +188,12 @@ def draw_titlescreen(screen: pygame.Surface, gamestate: GameState):
     quitButton = gamestate.font.render("Quit", True, (255,255,255), (0,0,0))
     chooseMapButton = gamestate.font.render(gamestate.maps.get_selected_map().title, True, (255,255,255), (0,0,0))
     welcome = gamestate.font.render("Welcome!", True, (255,255,255), (0,0,0))
-    screen.blit(quitButton,(400,600))
+    screen.blit(quitButton,(400,750))
     screen.blit(welcome, (250, 100))
     screen.blit(chooseMapButton, (300,600))
 
-    screen.blit(gamestate.leftarrow, (300,650))
-    screen.blit(gamestate.rightarrow, (500,650))
+    screen.blit(gamestate.leftarrow, (gamestate.LARROW_X, gamestate.ARROW_Y))
+    screen.blit(gamestate.rightarrow, (gamestate.RARROW_X, gamestate.ARROW_Y))
     pygame.display.update()
 
 def main():

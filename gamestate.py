@@ -28,6 +28,15 @@ class GameState:
         self.background = pygame.image.load("assets/windows.png")
         self.leftarrow = pygame.image.load("assets/left_arrow_93x70.png")
         self.rightarrow = pygame.image.load("assets/right_arrow_93x70.png")
+        self.ARROW_Y = 650
+        self.LARROW_X = 300
+        self.RARROW_X = 500
+        self.LARROW_RECT = self.leftarrow.get_rect()
+        self.LARROW_RECT.left = self.LARROW_X
+        self.LARROW_RECT.top = self.ARROW_Y
+        self.RARROW_RECT = self.rightarrow.get_rect()
+        self.RARROW_RECT.left = self.RARROW_X
+        self.RARROW_RECT.top = self.ARROW_Y
         
         # rendered_hitcircle_locs: a list of the x-positions of all the hitcircles to be rendered. can be off screen.
         self.rendered_hitcircles: list[Note] = []
