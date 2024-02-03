@@ -75,6 +75,20 @@ def draw_game(screen: pygame.Surface, gamestate: GameState):
         screen.blit(effect_text, (500, 150))
         gamestate.hitEffectCounter += 1
 
+    
+    if gamestate.combo > gamestate.nextComboVal:
+        gamestate.comboCounter = 0
+        gamestate.nextComboVal += 100
+
+
+    if (gamestate.comboCounter <= COMBO_EFFECT_TIMER):
+        gamestate.comboCounter += 1
+        combo_text = gamestate.font.render(str(gamestate.nextComboVal - 100) + "x Combo!!!", True, (255, 255, 255))
+        screen.blit(combo_text, (500, 250))
+
+
+        
+
     for hitcircle in gamestate.rendered_hitcircles:
         hitcircle.draw(screen)
 
