@@ -29,19 +29,19 @@ def update(dt, gamestate: GameState):
                 else:
 
 
-
-
 def draw(screen: pygame.Surface, gamestate: GameState):
     """
     Draw things to the window. Called once per frame.
     """
     screen.fill(BG_COLOR)
+    imp = pygame.image.load("windows.png").convert()
+    screen.blit(imp, (0, 0))
 
     for hitcircle_loc in gamestate.rendered_hitcircle_locs:
-        screen.blit(gamestate.hitcircle, (hitcircle_loc, 40))
+        screen.blit(gamestate.hitcircle, (hitcircle_loc, NOTESTREAM_Y))
         
-
     pygame.display.update()
+    
 
 def main():
     gamestate = GameState()
