@@ -1,7 +1,6 @@
 from gamestate import GameState
 from constants import *
 import pygame
-import wave
 from pygame.locals import *
 from visualizer import *
 from PIL import Image
@@ -31,6 +30,16 @@ def get_closest_note(gamestate : GameState) -> Note :
 
 
 def update_game(gamestate: GameState):
+    """
+    Update game. Called once per frame.
+    dt is the amount of time passed since last frame.
+    If you want to have constant apparent movement no matter your framerate,
+    what you can do is something like
+
+    x += v * dt
+
+    and this will scale your velocity based on time. Extend as necessary."""
+
     notesstream(gamestate)
     for event in pygame.event.get():
         if event.type == QUIT:
@@ -195,6 +204,7 @@ def main():
     gamestate = GameState()
     
     print(gamestate)
+    playMusic(gamestate.map.audio)
 
     
     fps = FPS
@@ -209,13 +219,13 @@ def main():
 
     #goose = pygame.image.load(), upload goose images to repo to pull
     while gamestate.playing:
-        update_titlescreen(gamestate)
+        update_game(dt, gamestate)
         
         if gamestate.entered_map:
             play_map(gamestate, screen, fpsClock, fps)
         
-        draw_titlescreen(screen, gamestate)
-        fpsClock.tick(fps)
+        draw_game(screen, gamestate)
+        dt = fpsClock.tick(fps)
 
 
 
