@@ -3,6 +3,7 @@ from constants import *
 import pygame
 from pygame.locals import *
 from visualizer import *
+from PIL import Image
 
 
 def get_closest_note(gamestate : GameState) -> Note :
@@ -62,7 +63,9 @@ def drawGoose(screen: pygame.Surface, gamestate: GameState): # draws the goose i
         imageToDisplay = "assets/good.png"
     else:
         imageToDisplay = gamestate.gooseArray[gamestate.gooseIndex]
-    screen.blit(imageToDisplay, (10, 10))  
+
+    GOOSE_Y = NOTESTREAM_Y-Image.open("assets/Waddle1.png").height
+    screen.blit(imageToDisplay, (10, GOOSE_Y))  
 
 def main():
     gamestate = GameState()
