@@ -10,7 +10,6 @@ def notesstream( gamestate: GameState):
     """modifies gamestate.rendered_hitcircle_locs to contain the x positions of all visible hitcircles on screen at the current timestep
 
     Args:
-        m (Map):  the map at this timestep
         gamestate (GameState): the gamestate at this timestep
     """
     m : Map = gamestate.map
@@ -23,12 +22,14 @@ def notesstream( gamestate: GameState):
 
     offset : float = (t * 60) * pixels_per_timestep
 
-    gamestate.rendered_hitcircle_locs = []
+    gamestate.rendered_hitcircles = []
     for i in range (len(notes)):
         start_loc = (i * pixels_between_beat) + SQUASHER_BAR_X # assumes first note starts ON squasher bar
         curr_loc = start_loc - offset
-        if ((notes[i] is not None) and curr_loc >= -50 and curr_loc <= SCREEN_WIDTH + 50): # if visible (with margin of error) TODO: change 50 to width of hit_circle
-            gamestate.rendered_hitcircle_locs.append(curr_loc) 
+        if (notes[i] is not None):
+            notes[i].x = curr_loc
+            if (curr_loc >= -50 and curr_loc <= SCREEN_WIDTH + 50): # if visible (with margin of error) TODO: change 50 to width of hit_circle
+                gamestate.rendered_hitcircles.append(notes[i]) 
 
 
 

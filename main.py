@@ -5,6 +5,7 @@ from pygame.locals import *
 from visualizer import *
 
 
+    
 
 def update(dt, gamestate: GameState):
     """
@@ -30,12 +31,13 @@ def update(dt, gamestate: GameState):
         #         if (abs(SQUASHER_BAR_X - )):
         #             gamestate.score += 1
         #         else:
-        elif event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_SPACE:
-                note_x = gamestate.re
-                # if (abs(GOOSE_BUFFER - )):
-                #     gamestate.score += 1
-                # else:
+        # elif event.type == pygame.KEYDOWN:
+        #     if event.key == pygame.K_SPACE:
+        #         hit_error = time.time() -  #TODO: make this actually right
+                
+        #         if (hit):
+        #             gamestate.score += 1
+        #         elif
 
 
 def draw(screen: pygame.Surface, gamestate: GameState):
@@ -46,8 +48,8 @@ def draw(screen: pygame.Surface, gamestate: GameState):
     imp = pygame.image.load("windows.png").convert()
     screen.blit(imp, (0, 0))
 
-    for hitcircle_loc in gamestate.rendered_hitcircle_locs:
-        screen.blit(gamestate.hitcircle, (hitcircle_loc, NOTESTREAM_Y))
+    for hitcircle in gamestate.rendered_hitcircles:
+        screen.blit(gamestate.hitcircle, (hitcircle.x, NOTESTREAM_Y))
 
     drawGoose(screen, gamestate)
     pygame.display.update()

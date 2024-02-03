@@ -6,6 +6,7 @@ pygame.mixer.init()
 class Note:
     def __init__(self):
         self.squashed = False
+        self.x = -10000
 
 class Notes:
     """data structure for efficient Note operations
