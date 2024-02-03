@@ -3,7 +3,7 @@ import pygame
 from map import *
 from gamestate import *
 import time
-
+from map import *
 
   
 def notesstream( gamestate: GameState):
@@ -12,7 +12,7 @@ def notesstream( gamestate: GameState):
     Args:
         gamestate (GameState): the gamestate at this timestep
     """
-    m : Map = gamestate.map
+    m : Map = gamestate.maps.get_selected_map()
     notes : list[Note | None] = m.notes.notes_arr
     t : float = time.time() - gamestate.startTime 
 
@@ -33,4 +33,11 @@ def notesstream( gamestate: GameState):
                 gamestate.rendered_hitcircles.append(notes[i]) 
 
 
-
+def get_closest_note(gamestate : GameState) -> Note :
+    if (len(gamestate.rendered_hitcircles) < 1):
+        return None
+    minim = gamestate.rendered_hitcircles[0]
+    for i in range (len(gamestate.rendered_hitcircles)):
+        if (abs(SQUASHER_BAR_X - gamestate.rendered_hitcircles[i].x) < abs(SQUASHER_BAR_X - minim.x)):
+            minim = gamestate.rendered_hitcircles[i]
+    return minim
