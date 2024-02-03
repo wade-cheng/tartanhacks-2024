@@ -33,6 +33,7 @@ def update(dt, gamestate: GameState):
         elif event.type == pygame.KEYDOWN:
             if event.key == pygame.K_SPACE:
                 closest = get_closest_note(gamestate)
+                closest.squashed = True
 
 
 def draw(screen: pygame.Surface, gamestate: GameState):
