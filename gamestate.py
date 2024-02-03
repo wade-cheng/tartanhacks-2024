@@ -34,7 +34,7 @@ class GameState:
 
         self.maps: MapHolder = MapHolder()
         self.entered_map = False
-
+        pygame.font.init()
         self.font = pygame.font.Font("assets/hero-speak.ttf", 42)
 
 

@@ -18,18 +18,31 @@ def get_closest_note(gamestate : GameState) -> Note :
     return minim
 
 
+def print_map_buttons(screen: pygame.Surface):
+    mapholder = MapHolder()
+    map_num = 1
+    button_y = 200
+    for map in mapholder.map_list:
+        buttonName = "Map " + str(map_num)
+        map_num += 1
+        mapButton = (buttonName, True, (255,255,255), (0,0,0))
+        screen.blit(mapButton, (350, button_y))
+        button_y += 50
+
+
 def update_game(gamestate: GameState):
     notesstream(gamestate)
     for event in pygame.event.get():
         if event.type == QUIT:
-            gamestate.playing = False
-        elif event.type == -1: # a constant like PLAYER_MOVE_EVENT = pygame.USEREVENT + 1
-            pass
+            gamestate.entered_map = False
+            pygame.mixer.pause()
         elif event.type == pygame.KEYDOWN:
-            '''
-            if event.key == pygame.MOUSEBUTTONDOWN:
-                
-            '''
+            if event.key == MOUSEBUTTONDOWN:
+                mouse = pygame.mouse.get_pos()
+                if SCREEN_WIDTH/2 <= mouse[0] <= SCREEN_WIDTH/2 + 100 and SCREEN_HEIGHT/2 <= mouse[1] <= SCREEN_HEIGHT/2 + 100: #do math for select button!
+                    print_map_buttons(screen)
+                if 400 < mouse[0] < 500 and 600 < mouse[1] < 700: #do math for quit button!
+                    gamestate.playing = False
             if event.key == pygame.K_SPACE:
                 closest = get_closest_note(gamestate)
                 press_x = 0
@@ -101,8 +114,6 @@ def draw_game(screen: pygame.Surface, gamestate: GameState):
     screen.blit(score_text, (800, 50))
     screen.blit(combo_text, (800, 150))
 
-
-
     pygame.display.update()
 
 def drawGoose(screen: pygame.Surface, gamestate: GameState): # draws the goose in frames and includes user input
@@ -129,10 +140,34 @@ def drawGoose(screen: pygame.Surface, gamestate: GameState): # draws the goose i
 def playMusic(sound: pygame.mixer.Sound):
     pygame.mixer.find_channel().play(sound)
 
+def start_screen(font: pygame.font, screen: pygame.Surface) -> None:
+    # pygame.font.init()
+    # #intro_screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT), flags=0, vsync=1)
+    # pygame.display.set_caption("Goose Rhythm Game")
+    # screen.fill((0,0,0))
+    # quitButton = font.render("Quit", True, (255,255,255), (0,0,0))
+    # chooseMapButton = font.render("Choose Map", True, (255,255,255), (0,0,0))
+    # welcome = font.render("Welcome!", True, (255,255,255), (0,0,0))
+    # screen.blit(quitButton,(400,600))
+    # screen.blit(welcome, (250, 100))
+    # screen.blit(chooseMapButton, (300,600))
+    pass
+
+    pygame.font.init()
+    #intro_screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT), flags=0, vsync=1)
+    pygame.display.set_caption("Loose-y Goose-y")
+    screen.fill((0,0,0))
+    quitButton = font.render("Quit", True, (255,255,255), (0,0,0))
+    chooseMapButton = font.render("Choose Map", True, (255,255,255), (0,0,0))
+    welcome = font.render("Welcome!", True, (255,255,255), (0,0,0))
+    screen.blit(quitButton,(400,600))
+    screen.blit(welcome, (250, 100))
+    screen.blit(chooseMapButton, (300,600))
+    
 def play_map(gamestate: GameState, screen, fpsClock, fps):
     playMusic(gamestate.maps.get_selected_map().audio)
 
-    while gamestate.playing:
+    while gamestate.entered_map:
         update_game(gamestate)
         draw_game(screen, gamestate)
         fpsClock.tick(fps)
@@ -159,6 +194,7 @@ def main():
     pygame.font.init()
 
     gamestate = GameState()
+    
     print(gamestate)
 
     
@@ -166,18 +202,17 @@ def main():
     fpsClock = pygame.time.Clock()
 
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT), flags=0, vsync=1)
+    start_screen(gamestate.font, screen)
     pygame.display.set_caption("Loosey Goosey")
     # screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT), flags=pygame.SCALED, vsync=1)
     screen.fill(BG_COLOR)
     pygame.display.update()
 
     #goose = pygame.image.load(), upload goose images to repo to pull
-
     while gamestate.playing:
         update_titlescreen(gamestate)
         
         if gamestate.entered_map:
-            print("yeah")
             play_map(gamestate, screen, fpsClock, fps)
         
         draw_titlescreen(screen, gamestate)
