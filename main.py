@@ -55,7 +55,7 @@ def update(dt, gamestate: GameState):
 
     
 
-def draw(screen: pygame.Surface, gamestate: GameState):
+def draw(screen: pygame.Surface, font, gamestate: GameState):
     """
     Draw things to the window. Called once per frame.
     """
@@ -67,7 +67,14 @@ def draw(screen: pygame.Surface, gamestate: GameState):
 
     drawGoose(screen, gamestate)
 
-    pygame.draw.line(screen, color=(0,0,0), start_pos=(SQUASHER_BAR_X, NOTESTREAM_Y - 20), end_pos=(SQUASHER_BAR_X, NOTESTREAM_Y + 60), width=10)
+    pygame.draw.line(screen, color=(255, 255, 255), start_pos=(SQUASHER_BAR_X, NOTESTREAM_Y - 100), end_pos=(SQUASHER_BAR_X, NOTESTREAM_Y + 100), width=5)
+
+    score_text = font.render("Score: " + str(gamestate.score), True, (255, 255, 255))
+    combo_text = font.render("Combo: " + str(gamestate.combo), True, (255, 255, 255))
+    screen.blit(score_text, (800, 50))
+    screen.blit(combo_text, (800, 150))
+
+
 
     pygame.display.update()
 
@@ -98,6 +105,8 @@ def main():
     print(gamestate)
 
     pygame.init()
+    pygame.font.init()
+    font = pygame.font.Font(None, 40)
 
     fps = FPS
     fpsClock = pygame.time.Clock()
@@ -113,7 +122,7 @@ def main():
     dt = 1 / fps
     while gamestate.playing:
         update(dt, gamestate)
-        draw(screen, gamestate)
+        draw(screen, font, gamestate)
         dt = fpsClock.tick(fps)
 
 

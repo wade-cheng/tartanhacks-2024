@@ -10,8 +10,8 @@ class Note:
         self.x = -10000
         self.sprite = pygame.image.load('assets/egg.png')
         self.squashed_sprite = pygame.image.load('assets/egg_crack.png')
-        self.sprite_offset = 40 # should be half of sprite width
-        self.squashed_sprite_offset = 40 # should be half of squashed sprite width
+        self.sprite_offset = 150 # should be half of sprite width
+        self.squashed_sprite_offset = 150 # should be half of squashed sprite width
 
     def draw(self, screen: pygame.Surface):
         if self.squashed:
