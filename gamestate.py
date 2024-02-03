@@ -1,3 +1,4 @@
+import os
 import pygame
 from pygame.locals import *
 from map import *
@@ -27,7 +28,25 @@ class GameState:
         
         self.startTime = time.time()
 
+        self.maps: MapHolder = MapHolder()
 
+
+class MapHolder:
+    def __init__(self):
+        print(f"discovered maps {os.listdir('maps/')}")
+        self.map_idx = 0
+        self.map_list = []
+        for map in os.listdir("maps"):
+            self.map_list.append(f"maps/{map}")
+    
+    def get_selected_map(self) -> Map:
+        return self.map_list[self.map_idx]
+    
+    def select_next(self):
+        self.map_idx = (self.map_idx + 1) % len(self.map_list)
+    
+    def select_last(self):
+        self.map_idx = (self.map_idx - 1) % len(self.map_list)
 
 if __name__ == "__main__":
     GameState()
