@@ -11,7 +11,7 @@ class GameState:
     def __init__(self) -> None:
         self.gooseIndex = 0
         self.playing = True
-        self.gooseSquashedGood = False
+        self.gooseSquashedGood = True
         self.gooseSquashedBad = False
         self.score = 0
         self.combo = 0
