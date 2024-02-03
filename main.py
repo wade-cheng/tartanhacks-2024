@@ -41,19 +41,21 @@ def draw(screen: pygame.Surface, gamestate: GameState):
     Draw things to the window. Called once per frame.
     """
     screen.fill(BG_COLOR)
-    imp = pygame.image.load("windows.png").convert()
-    screen.blit(imp, (0, 0))
+    screen.blit(gamestate.background, (0, 0))
 
     for hitcircle in gamestate.rendered_hitcircles:
-        screen.blit(gamestate.hitcircle, (hitcircle.x, NOTESTREAM_Y))
+        if hitcircle.squashed:
+            screen.blit(gamestate.squashed_hitcircle, (hitcircle.x, NOTESTREAM_Y))
+        else:
+            screen.blit(gamestate.hitcircle, (hitcircle.x, NOTESTREAM_Y))
+
 
     drawGoose(screen, gamestate)
     pygame.display.update()
     
 def drawGoose(screen: pygame.Surface, gamestate: GameState): # draws the goose in frames and includes user input
-    gooseArray = [pygame.image.load("Sprite1.png"), pygame.image.load("Sprite2.png"), pygame.image.load("Sprite3.png"), pygame.image.load("Sprite4.png")]
-    gamestate.gooseIndex = (gamestate.gooseIndex + 1) % len(gooseArray)   
-    screen.blit(gooseArray[gamestate.gooseIndex], (10, NOTESTREAM_Y))  
+    gamestate.gooseIndex = (gamestate.gooseIndex + 1) % len(gamestate.gooseArray)   
+    screen.blit(gamestate.gooseArray[gamestate.gooseIndex], (10, 10))  
 
 def main():
     gamestate = GameState()
