@@ -63,20 +63,15 @@ def draw(screen: pygame.Surface, gamestate: GameState):
 
     pygame.display.update()
     
-# def drawGooseBad(screen: pygame.Surface, gamestate: GameState):
+def drawGooseGood(screen: pygame.Surface, gamestate: GameState):
+    gamestate.gooseIndex = (gamestate.gooseIndex + 1) % len(gamestate.gooseArray)   
+    imageToDisplay = "assets/squashgood.png"
+
+    GOOSE_Y = NOTESTREAM_Y-Image.open("assets/squashgood.png").height
+    screen.blit(imageToDisplay, (10, GOOSE_Y))  
 
 def drawGoose(screen: pygame.Surface, gamestate: GameState): # draws the goose in frames and includes user input
     gamestate.gooseIndex = (gamestate.gooseIndex + 1) % len(gamestate.gooseArray)   
-
-    # if gamestate.gooseSquashedBad:
-    #     imageToDisplay = "assets/bad.png"
-    #     for i in range(4):
-    #         screen.blit(imageToDisplay, (10, 10)) 
-    # elif gamestate.gooseSquashedGood:
-    #     imageToDisplay = "assets/good.png"
-    #     for i in range(4):
-    #         screen.blit(imageToDisplay, (10, 10)) 
-    # else:
     imageToDisplay = gamestate.gooseArray[gamestate.gooseIndex]
 
     GOOSE_Y = NOTESTREAM_Y-Image.open("assets/Waddle1.png").height
