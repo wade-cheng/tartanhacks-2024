@@ -19,6 +19,8 @@ class GameState:
         self.playing = True
         self.score = 0
         self.combo = 0
+        self.pressNext = False
+        self.pressBack = False
 
         self.hitstate = 0
         self.hitEffectCounter = 0
