@@ -38,6 +38,8 @@ class GameState:
         self.entered_map = False
         pygame.font.init()
         self.font = pygame.font.Font("assets/hero-speak.ttf", 42)
+        self.titlefont = pygame.font.Font("assets/title-font.ttf", 72)
+
 
 
 class MapHolder:
