@@ -35,6 +35,7 @@ def update_game(gamestate: GameState):
     for event in pygame.event.get():
         if event.type == QUIT:
             gamestate.entered_map = False
+            gamestate.playing = False
             pygame.mixer.pause()
         elif event.type == pygame.KEYDOWN:
         
