@@ -10,6 +10,7 @@ def get_closest_note(gamestate : GameState) -> Note :
     for i in range (len(gamestate.rendered_hitcircles)):
         if (abs(SQUASHER_BAR_X - gamestate.rendered_hitcircles[i].x) < abs(SQUASHER_BAR_X - minim.x)):
             minim = gamestate.rendered_hitcircles[i]
+    return minim
 
 
 def update(dt, gamestate: GameState):
@@ -34,6 +35,9 @@ def update(dt, gamestate: GameState):
             if event.key == pygame.K_SPACE:
                 closest = get_closest_note(gamestate)
                 closest.squashed = True
+    
+    closest = get_closest_note(gamestate)
+    closest.squashed = True
 
 
 def draw(screen: pygame.Surface, gamestate: GameState):
