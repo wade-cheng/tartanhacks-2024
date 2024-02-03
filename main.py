@@ -69,8 +69,8 @@ def draw(screen: pygame.Surface, font, gamestate: GameState):
 
     pygame.draw.line(screen, color=(255, 255, 255), start_pos=(SQUASHER_BAR_X, NOTESTREAM_Y - 100), end_pos=(SQUASHER_BAR_X, NOTESTREAM_Y + 100), width=5)
 
-    score_text = font.render("Score: " + str(gamestate.score), True, (255, 255, 255), (0,0,0))
-    combo_text = font.render("Combo: " + str(round(gamestate.combo,2)), True, (255, 255, 255), (0,0,0))
+    score_text = font.render("Score: " + str(gamestate.score), True, (255, 255, 255))#, (0,0,0))
+    combo_text = font.render("Combo: " + str(round(gamestate.combo,2)), True, (255, 255, 255))#, (0,0,0))
     screen.blit(score_text, (800, 50))
     screen.blit(combo_text, (800, 150))
 
@@ -106,7 +106,7 @@ def main():
 
     pygame.init()
     pygame.font.init()
-    font = pygame.font.Font(None, 40)
+    font = pygame.font.Font("assets/hero-speak.ttf", 42)
 
     fps = FPS
     fpsClock = pygame.time.Clock()
