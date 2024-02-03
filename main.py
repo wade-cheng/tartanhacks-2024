@@ -48,9 +48,14 @@ def draw(screen: pygame.Surface, gamestate: GameState):
 
     for hitcircle_loc in gamestate.rendered_hitcircle_locs:
         screen.blit(gamestate.hitcircle, (hitcircle_loc, NOTESTREAM_Y))
-        
+
+    drawGoose(screen, gamestate)
     pygame.display.update()
     
+def drawGoose(screen: pygame.Surface, gamestate: GameState): # draws the goose in frames and includes user input
+    gooseArray = [pygame.image.load("Sprite1.png"), pygame.image.load("Sprite2.png"), pygame.image.load("Sprite3.png"), pygame.image.load("Sprite4.png")]
+    gamestate.gooseIndex = (gamestate.gooseIndex + 1) % len(gooseArray)   
+    screen.blit(gooseArray[gamestate.gooseIndex], (10, NOTESTREAM_Y))  
 
 def main():
     gamestate = GameState()
@@ -73,8 +78,8 @@ def main():
     while gamestate.playing:
         update(dt, gamestate)
         draw(screen, gamestate)
-
         dt = fpsClock.tick(fps)
+
 
 
 if __name__ == "__main__":

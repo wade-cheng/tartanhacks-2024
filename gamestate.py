@@ -9,6 +9,7 @@ class GameState:
     so previous code doesn't break"""
     
     def __init__(self) -> None:
+        self.gooseIndex = 0
         self.playing = True
         self.score = 0
         self.hitcircle = pygame.image.load('assets/hit_circle_basic.png')
