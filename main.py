@@ -36,6 +36,10 @@ def update(dt, gamestate: GameState):
         elif event.type == -1: # a constant like PLAYER_MOVE_EVENT = pygame.USEREVENT + 1
             pass
         elif event.type == pygame.KEYDOWN:
+            '''
+            if event.key == pygame.MOUSEBUTTONDOWN:
+                
+            '''
             if event.key == pygame.K_SPACE:
                 closest = get_closest_note(gamestate)
                 if closest == None:
@@ -105,13 +109,21 @@ def playMusic(sound: pygame.mixer.Sound):
     pygame.mixer.find_channel().play(sound)
 
 def main():
+    '''
+    intro_screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT), flags=0, vsync=1)
+    pygame.display.set_caption("Goose Rhythm Game")
+    screen.fill((0,0,0))
+    quitButton = font.render("Quit", True, (255,255,255), (0,0,0))
+    welcome = font.render(")
+    intro_screen.blit(quitButton,(400,600))
+    intro_screen.blit(welcome, (350, 100))
+    '''
     gamestate = GameState()
     print(gamestate)
-    playMusic(gamestate.map.audio)
 
     pygame.init()
     pygame.font.init()
-    font = pygame.font.Font("assets/hero-speak.ttf", 42)
+    font = pygame.font.Font(None, 40)
 
     fps = FPS
     fpsClock = pygame.time.Clock()
