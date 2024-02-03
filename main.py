@@ -30,13 +30,12 @@ def print_map_buttons(screen: pygame.Surface):
         button_y += 50
 
 
-def update_game(gamestate: GameState, screen: pygame.Surface):
+def update_game(gamestate: GameState):
     notesstream(gamestate)
     for event in pygame.event.get():
         if event.type == QUIT:
-            gamestate.playing = False
-        elif event.type == -1: # a constant like PLAYER_MOVE_EVENT = pygame.USEREVENT + 1
-            pass
+            gamestate.entered_map = False
+            pygame.mixer.pause()
         elif event.type == pygame.KEYDOWN:
             if event.key == MOUSEBUTTONDOWN:
                 mouse = pygame.mouse.get_pos()
@@ -101,8 +100,6 @@ def draw_game(screen: pygame.Surface, gamestate: GameState):
     screen.blit(score_text, (800, 50))
     screen.blit(combo_text, (800, 150))
 
-
-
     pygame.display.update()
 
 def drawGoose(screen: pygame.Surface, gamestate: GameState): # draws the goose in frames and includes user input
@@ -129,24 +126,23 @@ def drawGoose(screen: pygame.Surface, gamestate: GameState): # draws the goose i
 def playMusic(sound: pygame.mixer.Sound):
     pygame.mixer.find_channel().play(sound)
 
-def play_map(gamestate: GameState):
+def start_screen(font: pygame.font, screen: pygame.Surface) -> None:
+    # pygame.font.init()
+    # #intro_screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT), flags=0, vsync=1)
+    # pygame.display.set_caption("Goose Rhythm Game")
+    # screen.fill((0,0,0))
+    # quitButton = font.render("Quit", True, (255,255,255), (0,0,0))
+    # chooseMapButton = font.render("Choose Map", True, (255,255,255), (0,0,0))
+    # welcome = font.render("Welcome!", True, (255,255,255), (0,0,0))
+    # screen.blit(quitButton,(400,600))
+    # screen.blit(welcome, (250, 100))
+    # screen.blit(chooseMapButton, (300,600))
     pass
 
-def start_screen(font: pygame.font, screen: pygame.Surface) -> None:
-    pygame.font.init()
-    #intro_screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT), flags=0, vsync=1)
-    pygame.display.set_caption("Goose Rhythm Game")
-    screen.fill((0,0,0))
-    quitButton = font.render("Quit", True, (255,255,255), (0,0,0))
-    chooseMapButton = font.render("Choose Map", True, (255,255,255), (0,0,0))
-    welcome = font.render("Welcome!", True, (255,255,255), (0,0,0))
-    screen.blit(quitButton,(400,600))
-    screen.blit(welcome, (250, 100))
-    screen.blit(chooseMapButton, (300,600))
 def play_map(gamestate: GameState, screen, fpsClock, fps):
     playMusic(gamestate.maps.get_selected_map().audio)
 
-    while gamestate.playing:
+    while gamestate.entered_map:
         update_game(gamestate)
         draw_game(screen, gamestate)
         fpsClock.tick(fps)
@@ -191,10 +187,8 @@ def main():
 
     while gamestate.playing:
         update_titlescreen(gamestate)
-        update_game(gamestate, screen)
         
         if gamestate.entered_map:
-            print("yeah")
             play_map(gamestate, screen, fpsClock, fps)
         
         draw_titlescreen(screen, gamestate)
