@@ -2,9 +2,9 @@ from gamestate import GameState
 from constants import *
 import pygame
 from pygame.locals import *
+from visualizer import *
 
 
-# def get_closest_note
 
 def update(dt, gamestate: GameState):
     """
@@ -17,6 +17,8 @@ def update(dt, gamestate: GameState):
 
     and this will scale your velocity based on time. Extend as necessary."""
 
+    notesstream(gamestate)
+
     for event in pygame.event.get():
         if event.type == QUIT:
             gamestate.playing = False
@@ -25,9 +27,9 @@ def update(dt, gamestate: GameState):
         # elif event.type == pygame.KEYDOWN:
         #     if event.key == pygame.K_SPACE:
 
-                # if (abs(GOOSE_BUFFER - )):
-                #     gamestate.score += 1
-                # else:
+        #         if (abs(SQUASHER_BAR_X - )):
+        #             gamestate.score += 1
+        #         else:
 
 
 def draw(screen: pygame.Surface, gamestate: GameState):
