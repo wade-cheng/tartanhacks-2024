@@ -26,11 +26,11 @@ def update(dt, gamestate: GameState):
                 case "W":
                     print("pressed up")
                 case "A":
-                    print("pressed A")
+                    print("pressed left")
                 case "S":
-                    print("pressed S")
+                    print("pressed down")
                 case "D":
-                    print("pressed D")
+                    print("pressed right")
 
 
 def draw(screen: pygame.Surface, gamestate: GameState):
