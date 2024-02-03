@@ -37,6 +37,7 @@ def update_game(gamestate: GameState):
             gamestate.entered_map = False
             pygame.mixer.pause()
         elif event.type == pygame.KEYDOWN:
+        
             if event.key == pygame.K_SPACE:
                 closest = get_closest_note(gamestate)
                 press_x = 0
@@ -93,7 +94,7 @@ def draw_game(screen: pygame.Surface, gamestate: GameState):
         combo_text = gamestate.font.render(str(gamestate.nextComboVal - 100) + "x Combo!!!", True, (255, 255, 255))
         screen.blit(combo_text, (500, 250))
 
-
+        
         
 
     for hitcircle in gamestate.rendered_hitcircles:
