@@ -8,12 +8,28 @@ class Note:
         self.squashed = False
 
 class Notes:
-    """data structure for efficient Note operations"""
+    """data structure for efficient Note operations
+    is a list of the Note class
+    for some n, if self.notes_arr[n] is not None, then there is a Note at beat n
+    """
     def __init__(self, notes: list[Note | None]):
         self.notes_arr: list[Note | None] = notes
 
 
 class Map:
+    """
+    takes in a file path to a map folder. tries to extract the following data:
+    self.author: str 
+        author of the map file
+    self.audio: pygame.mixer.Sound
+        audio file to use for the map
+    self.offset: float 
+        seconds of offset before first beat
+    self.bpm: int
+        beats per minute
+    self.notes: Notes
+        see doc for Notes
+    """
     def __init__(self, maps_folderpath: str):
         print("loading map.")
         if maps_folderpath[-1] == "/":
