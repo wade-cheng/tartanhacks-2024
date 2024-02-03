@@ -5,7 +5,12 @@ from pygame.locals import *
 from visualizer import *
 
 
-    
+def get_closest_note(gamestate : GameState) -> Note :
+    minim = gamestate.rendered_hitcircles[0]
+    for i in range (len(gamestate.rendered_hitcircles)):
+        if (abs(SQUASHER_BAR_X - gamestate.rendered_hitcircles[i].x) < abs(SQUASHER_BAR_X - minim.x)):
+            minim = gamestate.rendered_hitcircles[i]
+
 
 def update(dt, gamestate: GameState):
     """
@@ -25,19 +30,9 @@ def update(dt, gamestate: GameState):
             gamestate.playing = False
         elif event.type == -1: # a constant like PLAYER_MOVE_EVENT = pygame.USEREVENT + 1
             pass
-        # elif event.type == pygame.KEYDOWN:
-        #     if event.key == pygame.K_SPACE:
-
-        #         if (abs(SQUASHER_BAR_X - )):
-        #             gamestate.score += 1
-        #         else:
-        # elif event.type == pygame.KEYDOWN:
-        #     if event.key == pygame.K_SPACE:
-        #         hit_error = time.time() -  #TODO: make this actually right
-                
-        #         if (hit):
-        #             gamestate.score += 1
-        #         elif
+        elif event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_SPACE:
+                closest = get_closest_note(gamestate)
 
 
 def draw(screen: pygame.Surface, gamestate: GameState):
