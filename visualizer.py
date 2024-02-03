@@ -20,7 +20,8 @@ def notesstream( gamestate: GameState):
 
     pixels_per_timestep : int = m.bpm * (SCREEN_WIDTH - SQUASHER_BAR_X) / (BEATS_ON_SCREEN * 60 * FPS) 
 
-    offset : float = (t * 60) * pixels_per_timestep
+   
+    offset : float = ((t - m.offset)* 60) * pixels_per_timestep 
 
     gamestate.rendered_hitcircles = []
     for i in range (len(notes)):

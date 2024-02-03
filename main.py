@@ -109,6 +109,7 @@ def playMusic(sound: pygame.mixer.Sound):
     pygame.mixer.find_channel().play(sound)
 
 def main():
+<<<<<<< HEAD
     '''
     intro_screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT), flags=0, vsync=1)
     pygame.display.set_caption("Goose Rhythm Game")
@@ -120,10 +121,28 @@ def main():
     '''
     gamestate = GameState()
     print(gamestate)
+    playMusic(gamestate.map.audio)
+=======
+	'''
+	Perhaps have all of this should be put into its own method, so once the game ends it calls again to RETURN
+	def start_screen() -> None:
+		intro_screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT), flags=0, vsync=1)
+		pygame.display.set_caption("Goose Rhythm Game")
+		screen.fill((0,0,0))
+		quitButton = font.render("Quit", True, (255,255,255), (0,0,0))
+		chooseMapButton = font.render("Choose Map", True, (255,255,255), (0,0,0))
+		welcome = font.render(")
+		intro_screen.blit(quitButton,(400,600))
+		intro_screen.blit(welcome, (250, 100))
+		intro_screen.blit(chooseMapButton, (300,600))
+	'''
+	gamestate = GameState()
+	print(gamestate)
+>>>>>>> c397a87 (adding comments for a loading screen etc.)
 
     pygame.init()
     pygame.font.init()
-    font = pygame.font.Font(None, 40)
+    font = pygame.font.Font("assets/hero-speak.ttf", 42)
 
     fps = FPS
     fpsClock = pygame.time.Clock()
@@ -136,12 +155,21 @@ def main():
 
     #goose = pygame.image.load(), upload goose images to repo to pull
 
+<<<<<<< HEAD
     dt = 1 / fps
     while gamestate.playing:
         update(dt, gamestate)
         draw(screen, font, gamestate)
         dt = fpsClock.tick(fps)
 
+=======
+	dt = 1 / fps
+	while gamestate.playing:
+		update(dt, gamestate)
+		draw(screen, font, gamestate)
+		dt = fpsClock.tick(fps)
+	#call start after?
+>>>>>>> c397a87 (adding comments for a loading screen etc.)
 
 
 if __name__ == "__main__":
