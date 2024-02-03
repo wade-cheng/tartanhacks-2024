@@ -14,6 +14,7 @@ class GameState:
         self.gooseSquashedCounter = 0
         self.gooseArray = [pygame.image.load("assets/Waddle1.png"), pygame.image.load("assets/Waddle2.png"), pygame.image.load("assets/Waddle3.png"), pygame.image.load("assets/Waddle4.png")]
         
+        self.title = True
         self.playing = True
         self.score = 0
         self.combo = 0
