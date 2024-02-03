@@ -180,11 +180,13 @@ def draw_titlescreen(screen: pygame.Surface, gamestate: GameState):
     welcome = gamestate.font.render("Welcome!", True, (255,255,255), (0,0,0))
     pressSpaceToPlay = gamestate.font.render("Press Enter to Play!", True, (255,255,255), (0,0,0))
     #screen.blit(quitButton,(400,750))
+    titlegoose = pygame.image.load("assets/squashgood.png")
     screen.blit(welcome, (250, 100))
     screen.blit(chooseMapButton, (300,600))
-    screen.blit(pressSpaceToPlay, (350, 500))
+    screen.blit(pressSpaceToPlay, (325, 375))
     screen.blit(gamestate.leftarrow, (gamestate.LARROW_X, gamestate.ARROW_Y))
     screen.blit(gamestate.rightarrow, (gamestate.RARROW_X, gamestate.ARROW_Y))
+    screen.blit(titlegoose, (325, 325))
     pygame.display.update()
 
 def main():
