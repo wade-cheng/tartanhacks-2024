@@ -187,7 +187,7 @@ def update_titlescreen(gamestate: GameState) -> None:
         elif event.type == pygame.KEYDOWN:
             match event.key:
                 case pygame.K_RETURN:
-                    gamestate.reset_map_gamestate()
+                    gamestate.reset_map_gamestate(gamestate.maps.get_selected_map())
                     gamestate.entered_map = True
                 case pygame.K_LEFT:
                     gamestate.maps.select_prev()

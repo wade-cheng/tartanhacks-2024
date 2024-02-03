@@ -52,7 +52,7 @@ class GameState:
         self.font = pygame.font.Font("assets/hero-speak.ttf", 42)
         self.titlefont = pygame.font.Font("assets/title-font.ttf", 72)
 
-    def reset_map_gamestate(self):
+    def reset_map_gamestate(self, map: Map):
         self.startTime = time.time()
 
         self.gooseIndex = 0
@@ -66,6 +66,8 @@ class GameState:
         self.hitEffectCounter = 0
         self.nextComboVal = 100
         self.comboCounter = COMBO_EFFECT_TIMER + 1
+
+        self.maps.uncrush(map=map)
 
 class MapHolder:
     def __init__(self):
@@ -86,6 +88,11 @@ class MapHolder:
     
     def select_last(self):
         self.__map_idx = (self.__map_idx - 1) % len(self.__map_list)
+
+    def uncrush (self, map):
+        for n in map.notes.notes_arr:
+            if n != None:
+                n.squashed = False
 
 if __name__ == "__main__":
     GameState()
