@@ -48,7 +48,7 @@ def update(dt, gamestate: GameState):
                     scaled_error = (closest.x - SQUASHER_BAR_X)/ACCURACY_BUFFER * numpy.pi # to fit the domain of cosine
                     score_scaling = 0.5 * (numpy.cos(scaled_error) + 1)
                     gamestate.score += int(score_scaling * (gamestate.combo + 1) * 100)
-                    gamestate.combo += score_scaling
+                    gamestate.combo += score_scaling * 10
                     closest.squashed = True
                     gamestate.gooseSquashedCounter = 0
                     gamestate.gooseSquashedState = 1
@@ -70,7 +70,7 @@ def draw(screen: pygame.Surface, font, gamestate: GameState):
     pygame.draw.line(screen, color=(255, 255, 255), start_pos=(SQUASHER_BAR_X, NOTESTREAM_Y - 100), end_pos=(SQUASHER_BAR_X, NOTESTREAM_Y + 100), width=5)
 
     score_text = font.render("Score: " + str(gamestate.score), True, (255, 255, 255))
-    combo_text = font.render("Combo: " + str(gamestate.combo), True, (255, 255, 255))
+    combo_text = font.render("Combo: " + str(round(gamestate.combo,2)), True, (255, 255, 255))
     screen.blit(score_text, (800, 50))
     screen.blit(combo_text, (800, 150))
 
