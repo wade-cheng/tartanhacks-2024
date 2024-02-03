@@ -20,6 +20,9 @@ class GameState:
         self.score = 0
         self.combo = 0
 
+        self.hitstate = 0
+        self.hitEffectCounter = 0
+
         self.background = pygame.image.load("assets/windows.png")
         
         # rendered_hitcircle_locs: a list of the x-positions of all the hitcircles to be rendered. can be off screen.

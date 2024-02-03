@@ -52,12 +52,15 @@ def update(dt, gamestate: GameState):
                     gamestate.combo = 0
                     gamestate.gooseSquashedCounter = 0
                     gamestate.gooseSquashedState = 2
+                    gamestate.hitstate = 0
                 else:
                     scaled_error = (press_x - SQUASHER_BAR_X)/ACCURACY_BUFFER * numpy.pi # to fit the domain of cosine
                     score_scaling = 0.5 * (numpy.cos(scaled_error) + 1)
                     gamestate.score += int(score_scaling * (gamestate.combo + 1) * 100)
                     gamestate.combo += score_scaling * 10
                     closest.squashed = True
+                    gamestate.hitstate = int(abs(scaled_error)) + 1 # theoretically between 1 and 4 
+                    gamestate.hitEffectCounter = 0
                     gamestate.gooseSquashedCounter = 0
                     gamestate.gooseSquashedState = 1
 
@@ -69,6 +72,18 @@ def draw(screen: pygame.Surface, font, gamestate: GameState):
     """
     screen.fill(BG_COLOR)
     screen.blit(gamestate.background, (0, 0))
+    if (gamestate.hitEffectCounter <= HIT_EFFECT_TIMER and gamestate.hitstate > 0):
+        match gamestate.hitstate:
+            case 1:
+                effect_text = font.render("perfect!!", True, (255, 255, 255))
+            case 2:
+                effect_text = font.render("awesome!!", True, (100, 255, 100))
+            case 3:
+                effect_text = font.render("nice!", True, (255, 100, 100))
+            case 4:
+                effect_text = font.render("good", True, (50, 50, 200))
+        screen.blit(effect_text, (500, 150))
+        gamestate.hitEffectCounter += 1
 
     for hitcircle in gamestate.rendered_hitcircles:
         hitcircle.draw(screen)
@@ -87,22 +102,21 @@ def draw(screen: pygame.Surface, font, gamestate: GameState):
     pygame.display.update()
 
 def drawGoose(screen: pygame.Surface, gamestate: GameState): # draws the goose in frames and includes user input
-    if gamestate.gooseSquashedCounter >= 10:
+    if gamestate.gooseSquashedCounter >= GOOSE_SQUASH_TIMER:
         gamestate.gooseSquashedCounter = 0
         gamestate.gooseSquashedState = 0
 
-    if gamestate.gooseSquashedState == 1: # good
-        imageToDisplay = pygame.image.load("assets/squashgood.png")
-        gamestate.gooseSquashedCounter += 1
-
-    elif gamestate.gooseSquashedState == 2: # bad
-        imageToDisplay = pygame.image.load("assets/squashbad.png")
-        gamestate.gooseSquashedCounter += 1
-
-    else:
-        gamestate.gooseIndex += 1
-        gamestate.gooseIndex %= (len(gamestate.gooseArray) * 3)
-        imageToDisplay = gamestate.gooseArray[int(gamestate.gooseIndex/3)]
+    match gamestate.gooseSquashedState:
+        case 0: #running
+            gamestate.gooseIndex += 1
+            gamestate.gooseIndex %= (len(gamestate.gooseArray) * 3)
+            imageToDisplay = gamestate.gooseArray[int(gamestate.gooseIndex/3)]
+        case 1: # good hit
+            imageToDisplay = pygame.image.load("assets/squashgood.png")
+            gamestate.gooseSquashedCounter += 1
+        case 2: #bad hit
+            imageToDisplay = pygame.image.load("assets/squashbad.png")
+            gamestate.gooseSquashedCounter += 1
 
     GOOSE_Y = NOTESTREAM_Y- 0.5 * Image.open("assets/Waddle1.png").height
 
