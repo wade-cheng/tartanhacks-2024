@@ -181,7 +181,9 @@ def update_titlescreen(gamestate: GameState) -> None:
                 gamestate.maps.select_next()
             if gamestate.RARROW_RECT.collidepoint(cursor_x, cursor_y):
                 gamestate.maps.select_next()
-        elif event.type == pygame.KEYDOWN:
+        elif event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE:
+
+            gamestate.reset_map_gamestate()
             gamestate.entered_map = True
 
 def draw_titlescreen(screen: pygame.Surface, gamestate: GameState):
