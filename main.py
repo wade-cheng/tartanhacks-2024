@@ -110,9 +110,10 @@ def draw_game(screen: pygame.Surface, gamestate: GameState):
 
     score_text = gamestate.font.render("Score: " + str(gamestate.score), True, (255, 255, 255))#, (0,0,0))
     combo_text = gamestate.font.render("Combo: " + str(round(gamestate.combo,2)), True, (255, 255, 255))#, (0,0,0))
-    screen.blit(score_text, (800, 50))
-    screen.blit(combo_text, (800, 150))
-
+    pressEscToLeave = gamestate.font.render("Press the 'Esc' Key to Escape", True, (255,255,255))
+    screen.blit(score_text, (750, 50))
+    screen.blit(combo_text, (750, 150))
+    screen.blit(pressEscToLeave, (400, 600))
     
 
     pygame.display.update()
@@ -201,7 +202,7 @@ def draw_titlescreen(screen: pygame.Surface, gamestate: GameState):
     #quitButton = gamestate.font.render("Quit", True, (255,255,255), (0,0,0))
     chooseMapButton = gamestate.font.render(gamestate.maps.get_selected_map().title, True, (255,255,255), (0,0,0))
     welcome = gamestate.font.render("Welcome!", True, (255,255,255), (0,0,0))
-    pressSpaceToPlay = gamestate.font.render("Press Space to Play!", True, (255,255,255), (0,0,0))
+    pressSpaceToPlay = gamestate.font.render("Press Enter to Play!", True, (255,255,255), (0,0,0))
     #screen.blit(quitButton,(400,750))
     screen.blit(welcome, (250, 100))
     screen.blit(chooseMapButton, (300,600))
@@ -222,7 +223,7 @@ def main():
     fpsClock = pygame.time.Clock()
 
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT), flags=0, vsync=1)
-
+    
     pygame.display.set_caption("Loosey Goosey")
     # screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT), flags=pygame.SCALED, vsync=1)
     screen.fill(BG_COLOR)
