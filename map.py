@@ -8,8 +8,8 @@ class Note:
     def __init__(self):
         self.squashed = False
         self.x = -10000
-        self.sprite = pygame.image.load('assets/hit_circle_basic.png')
-        self.squashed_sprite = pygame.image.load('assets/hit_circle_basic_squashed.png')
+        self.sprite = pygame.image.load('assets/egg.png')
+        self.squashed_sprite = pygame.image.load('assets/egg_crack.png')
         self.sprite_offset = 40 # should be half of sprite width
         self.squashed_sprite_offset = 40 # should be half of squashed sprite width
 
