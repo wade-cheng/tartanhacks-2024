@@ -1,5 +1,6 @@
 from constants import *
 import pygame
+from gamestate import *
 """
     # class Note:
 #     def __init__(self, count: int):
@@ -28,23 +29,24 @@ class Map:
 
         file.close()
 
-        
 
-
-def notesstream(m : Map):
+def notesstream(m : Map, gamestate : GameState):
     notes : list[bool] = m.notes.notes_arr 
 
-    # sync current time to start idx instead of it always zero
-    startIdx : int = 0
-    #adding an extra 3 beats so notes don't spawn out immediately
-    visibleNotes : list[bool] = notes[startIdx: startIdx + BEATS_ON_SCREEN + 3]
+    time : float = 0 # in seconds 
 
-    for i in range (len(visibleNotes)):
-        if (visibleNotes[i]):
-            x : int = (i * BEAT_WIDTH) + GOOSE_BUFFER
-            gamestate.rendered_hitcircle_locs.append(x)
+    pixels_between_beat : int = (SCREEN_WIDTH - SQUASHER_BAR_X) / BEATS_ON_SCREEN 
 
+    pixels_per_timestep : int = m.bpm * (SCREEN_WIDTH - SQUASHER_BAR_X) / (BEATS_ON_SCREEN * 3600) 
 
+    offset : float = (time * 60) * pixels_per_timestep
+
+    gamestate.rendered_hitcircle_locs = []
+    for i in range (len(notes)):
+        start_loc = (i * pixels_between_beat) + SQUASHER_BAR_X # assumes first note starts ON squasher bar
+        curr_loc = start_loc - offset
+        if (curr_loc >= -50 and curr_loc <= SCREEN_WIDTH + 50): # if visible (with margin of error) TODO: change 50 to width of hit_circle
+            gamestate.rendered_hitcircle_locs.append(curr_loc) 
 
 
 

@@ -3,6 +3,8 @@ from constants import *
 import pygame
 from pygame.locals import *
 
+
+
 def update(dt, gamestate: GameState):
     """
     Update game. Called once per frame.
@@ -20,17 +22,13 @@ def update(dt, gamestate: GameState):
         elif event.type == -1: # a constant like PLAYER_MOVE_EVENT = pygame.USEREVENT + 1
             pass
         elif event.type == pygame.KEYDOWN:
-            match event.key:
-                case pygame.K_SPACE:
-                    print("pressed space")
-                case "W":
-                    print("pressed up")
-                case "A":
-                    print("pressed A")
-                case "S":
-                    print("pressed S")
-                case "D":
-                    print("pressed D")
+            if event.key == pygame.K_SPACE:
+                note_x = gamestate.re
+                if (abs(GOOSE_BUFFER - )):
+                    gamestate.score += 1
+                else:
+
+
 
 
 def draw(screen: pygame.Surface, gamestate: GameState):
