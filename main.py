@@ -188,7 +188,6 @@ def main():
     fpsClock = pygame.time.Clock()
 
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT), flags=0, vsync=1)
-    start_screen(gamestate.font, screen)
     pygame.display.set_caption("Loosey Goosey")
     # screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT), flags=pygame.SCALED, vsync=1)
     screen.fill(BG_COLOR)
