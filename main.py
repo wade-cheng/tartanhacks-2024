@@ -111,6 +111,10 @@ def drawGoose(screen: pygame.Surface, gamestate: GameState): # draws the goose i
 def playMusic(sound: pygame.mixer.Sound):
     pygame.mixer.find_channel().play(sound)
 
+'''
+
+'''
+
 def main():
     '''
     Perhaps have all of this should be put into its own method, so once the game ends it calls again to RETURN
@@ -149,7 +153,7 @@ def main():
         update(dt, gamestate)
         draw(screen, font, gamestate)
         dt = fpsClock.tick(fps)
-    #call start after?
+
 
 
 if __name__ == "__main__":
