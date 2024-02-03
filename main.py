@@ -34,13 +34,14 @@ def draw(screen: pygame.Surface, gamestate: GameState):
     screen.fill(BG_COLOR)
 
     for hitcircle_loc in gamestate.rendered_hitcircle_locs:
-        screen.blit(gamestate.hitcircle, (0, hitcircle_loc))
+        screen.blit(gamestate.hitcircle, (hitcircle_loc, 40))
         
 
     pygame.display.update()
 
 def main():
     gamestate = GameState()
+    print(gamestate)
 
     pygame.init()
 
