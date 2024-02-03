@@ -4,6 +4,7 @@ import pygame
 from pygame.locals import *
 
 
+# def get_closest_note
 
 def update(dt, gamestate: GameState):
     """
@@ -21,12 +22,12 @@ def update(dt, gamestate: GameState):
             gamestate.playing = False
         elif event.type == -1: # a constant like PLAYER_MOVE_EVENT = pygame.USEREVENT + 1
             pass
-        elif event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_SPACE:
-                note_x = gamestate.re
-                if (abs(GOOSE_BUFFER - )):
-                    gamestate.score += 1
-                else:
+        # elif event.type == pygame.KEYDOWN:
+        #     if event.key == pygame.K_SPACE:
+
+                # if (abs(GOOSE_BUFFER - )):
+                #     gamestate.score += 1
+                # else:
 
 
 def draw(screen: pygame.Surface, gamestate: GameState):

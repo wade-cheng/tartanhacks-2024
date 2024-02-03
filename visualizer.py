@@ -6,6 +6,8 @@ from gamestate import *
 
 def notesstream(m: Map, gamestate: GameState):
     notes : list[bool] = m.notes.notes_arr
+    time : float = 0 # TODO: actually get this lol
+    
     pixels_between_beat : int = (SCREEN_WIDTH - SQUASHER_BAR_X) / BEATS_ON_SCREEN 
 
     pixels_per_timestep : int = m.bpm * (SCREEN_WIDTH - SQUASHER_BAR_X) / (BEATS_ON_SCREEN * 3600) 
