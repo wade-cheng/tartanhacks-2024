@@ -191,7 +191,7 @@ def main():
 
     while gamestate.playing:
         update_titlescreen(gamestate)
-        update_game(dt, gamestate, screen)
+        update_game(gamestate, screen)
         
         if gamestate.entered_map:
             print("yeah")
