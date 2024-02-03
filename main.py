@@ -111,37 +111,35 @@ def drawGoose(screen: pygame.Surface, gamestate: GameState): # draws the goose i
 def playMusic(sound: pygame.mixer.Sound):
     pygame.mixer.find_channel().play(sound)
 
-'''
-
-'''
-
-def main():
-    '''
-    Perhaps have all of this should be put into its own method, so once the game ends it calls again to RETURN
-    def start_screen() -> None:
+def start_screen(font: pygame.font) -> None:
+        pygame.font.init()
         intro_screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT), flags=0, vsync=1)
         pygame.display.set_caption("Goose Rhythm Game")
-        screen.fill((0,0,0))
+        intro_screen.fill((0,0,0))
         quitButton = font.render("Quit", True, (255,255,255), (0,0,0))
         chooseMapButton = font.render("Choose Map", True, (255,255,255), (0,0,0))
-        welcome = font.render(")
+        welcome = font.render("Welcome!", True, (255,255,255), (0,0,0))
         intro_screen.blit(quitButton,(400,600))
         intro_screen.blit(welcome, (250, 100))
         intro_screen.blit(chooseMapButton, (300,600))
-    '''
-    gamestate = GameState()
-    print(gamestate)
-    playMusic(gamestate.map.audio)
+        pygame.display.update()
 
+def main():
     pygame.init()
     pygame.font.init()
     font = pygame.font.Font("assets/hero-speak.ttf", 42)
 
+    start_screen(font)
+    gamestate = GameState()
+    print(gamestate)
+    playMusic(gamestate.map.audio)
+
+    
     fps = FPS
     fpsClock = pygame.time.Clock()
 
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT), flags=0, vsync=1)
-    pygame.display.set_caption("Goose Rhythm Game")
+    pygame.display.set_caption("Loosey Goosey")
     # screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT), flags=pygame.SCALED, vsync=1)
     screen.fill(BG_COLOR)
     pygame.display.update()
