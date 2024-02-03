@@ -1,5 +1,4 @@
 from constants import *
-from gamestate import * 
 
 """
     # class Note:
@@ -14,18 +13,25 @@ class Notes:
         self.notes_arr: list[bool] = ...
 
     def other methods idk
-
+"""
 class Map:
     def __init__(self, mapfolder_filepath: str):
-        # pass in file args
-        self.author: str = ...
-        self.audio: Sound = pygame.mixer.Sound(...)
-        self.notes: Notes = Notes(...)
-        self.bpm: int = …
-    """
+        file = open(mapfolder_filepath, "r")
+        file.readLine()
+        self.author: str = file.readLine()
+        file.readLine()
+        file.readLine()
+        self.bpm: int = file.readLine()
+        self.audio: pygame.mixer.Sound = pygame.mixer.Sound(file.readLine())
+        self.notes: list[bool] = []
+        
 
-def notesstream(m : Map, gamestate : GameState):
-    notestream_width = SCREEN_WIDTH - GOOSE_BUFFER
+        file.close()
+
+        
+
+
+def notesstream(m : Map):
     notes : list[bool] = m.notes.notes_arr 
 
     # sync current time to start idx instead of it always zero
