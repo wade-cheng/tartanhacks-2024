@@ -18,16 +18,16 @@ def get_closest_note(gamestate : GameState) -> Note :
     return minim
 
 
-def print_map_buttons(screen: pygame.Surface):
-    mapholder = MapHolder()
-    map_num = 1
-    button_y = 200
-    for map in mapholder.map_list:
-        buttonName = "Map " + str(map_num)
-        map_num += 1
-        mapButton = (buttonName, True, (255,255,255), (0,0,0))
-        screen.blit(mapButton, (350, button_y))
-        button_y += 50
+# def print_map_buttons(screen: pygame.Surface):
+#     mapholder = MapHolder()
+#     map_num = 1
+#     button_y = 200
+#     for map in mapholder.map_list:
+#         buttonName = "Map " + str(map_num)
+#         map_num += 1
+#         mapButton = font.render(buttonName, True, (255,255,255), (0,0,0))
+#         screen.blit(mapButton, (350, button_y))
+#         button_y += 50
 
 
 def update_game(gamestate: GameState):
@@ -37,12 +37,6 @@ def update_game(gamestate: GameState):
             gamestate.entered_map = False
             pygame.mixer.pause()
         elif event.type == pygame.KEYDOWN:
-            if event.key == MOUSEBUTTONDOWN:
-                mouse = pygame.mouse.get_pos()
-                if SCREEN_WIDTH/2 <= mouse[0] <= SCREEN_WIDTH/2 + 100 and SCREEN_HEIGHT/2 <= mouse[1] <= SCREEN_HEIGHT/2 + 100: #do math for select button!
-                    print_map_buttons(screen)
-                if 400 < mouse[0] < 500 and 600 < mouse[1] < 700: #do math for quit button!
-                    gamestate.playing = False
             if event.key == pygame.K_SPACE:
                 closest = get_closest_note(gamestate)
                 press_x = 0
@@ -114,6 +108,8 @@ def draw_game(screen: pygame.Surface, gamestate: GameState):
     screen.blit(score_text, (800, 50))
     screen.blit(combo_text, (800, 150))
 
+    
+
     pygame.display.update()
 
 def drawGoose(screen: pygame.Surface, gamestate: GameState): # draws the goose in frames and includes user input
@@ -163,7 +159,7 @@ def start_screen(font: pygame.font, screen: pygame.Surface) -> None:
     screen.blit(quitButton,(400,600))
     screen.blit(welcome, (250, 100))
     screen.blit(chooseMapButton, (300,600))
-    
+
 def play_map(gamestate: GameState, screen, fpsClock, fps):
     playMusic(gamestate.maps.get_selected_map().audio)
 
@@ -202,6 +198,7 @@ def main():
     fpsClock = pygame.time.Clock()
 
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT), flags=0, vsync=1)
+
     pygame.display.set_caption("Loosey Goosey")
     # screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT), flags=pygame.SCALED, vsync=1)
     screen.fill(BG_COLOR)
