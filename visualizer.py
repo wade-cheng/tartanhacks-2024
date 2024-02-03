@@ -3,11 +3,17 @@ import pygame
 from map import Map
 from gamestate import *
 
-
+  
 def notesstream(m: Map, gamestate: GameState):
+    """modifies gamestate.rendered_hitcircle_locs to contain the x positions of all visible hitcircles on screen at the current timestep
+
+    Args:
+        m (Map):  the map at this timestep
+        gamestate (GameState): the gamestate at this timestep
+    """
     notes : list[bool] = m.notes.notes_arr
     time : float = 0 # TODO: actually get this lol
-    
+
     pixels_between_beat : int = (SCREEN_WIDTH - SQUASHER_BAR_X) / BEATS_ON_SCREEN 
 
     pixels_per_timestep : int = m.bpm * (SCREEN_WIDTH - SQUASHER_BAR_X) / (BEATS_ON_SCREEN * 3600) 
