@@ -65,7 +65,7 @@ def drawGoose(screen: pygame.Surface, gamestate: GameState): # draws the goose i
     else:
         imageToDisplay = gamestate.gooseArray[gamestate.gooseIndex]
 
-    GOOSE_Y = NOTESTREAM_Y-Image.open("assets/Waddle1.png").height /2
+    GOOSE_Y = NOTESTREAM_Y-Image.open("assets/Waddle1.png").height
     screen.blit(imageToDisplay, (10, GOOSE_Y))  
 
 def main():
