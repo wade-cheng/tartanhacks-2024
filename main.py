@@ -219,7 +219,7 @@ def main():
 
     #goose = pygame.image.load(), upload goose images to repo to pull
     while gamestate.playing:
-        update_game(dt, gamestate)
+        update_game(gamestate)
         
         if gamestate.entered_map:
             play_map(gamestate, screen, fpsClock, fps)
