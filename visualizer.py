@@ -1,4 +1,5 @@
 from constants import *
+from gamestate import * 
 
 """
     # class Note:
@@ -23,16 +24,19 @@ class Map:
         self.bpm: int = …
     """
 
-def notesstream(m : Map):
+def notesstream(m : Map, gamestate : GameState):
+    notestream_width = SCREEN_WIDTH - GOOSE_BUFFER
     notes : list[bool] = m.notes.notes_arr 
 
     # sync current time to start idx instead of it always zero
     startIdx : int = 0
-    visibleNotes : list[bool] = notes[startIdx: startIdx + BEATS_ON_SCREEN]
+    #adding an extra 3 beats so notes don't spawn out immediately
+    visibleNotes : list[bool] = notes[startIdx: startIdx + BEATS_ON_SCREEN + 3]
 
     for i in range (len(visibleNotes)):
-        # y position = NOTESTREAM_Y
-        # x position = (i * )
+        if (visibleNotes[i]):
+            x : int = (i * BEAT_WIDTH) + GOOSE_BUFFER
+            gamestate.rendered_hitcircle_locs.append(x)
 
 
 
