@@ -120,10 +120,11 @@ def main():
     '''
     gamestate = GameState()
     print(gamestate)
+    playMusic(gamestate.map.audio)
 
     pygame.init()
     pygame.font.init()
-    font = pygame.font.Font(None, 40)
+    font = pygame.font.Font("assets/hero-speak.ttf", 42)
 
     fps = FPS
     fpsClock = pygame.time.Clock()
