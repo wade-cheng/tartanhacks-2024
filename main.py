@@ -127,6 +127,7 @@ def main():
     '''
     gamestate = GameState()
     print(gamestate)
+    playMusic(gamestate.map.audio)
 
     pygame.init()
     pygame.font.init()
