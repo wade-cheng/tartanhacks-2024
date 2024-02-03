@@ -204,7 +204,7 @@ def main():
     gamestate = GameState()
     
     print(gamestate)
-    playMusic(gamestate.maps.audio)
+    playMusic(gamestate.maps.get_selected_map().audio)
 
     
     fps = FPS
