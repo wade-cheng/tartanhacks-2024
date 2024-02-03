@@ -41,7 +41,8 @@ def update_game(gamestate: GameState):
             if event.key == K_ESCAPE:
                 gamestate.entered_map = False
                 pygame.mixer.pause()
-            if event.key == pygame.K_SPACE:
+            # if event.key == pygame.K_SPACE:
+            else:
                 closest = get_closest_note(gamestate)
                 press_x = 0
                 if closest == None:
@@ -193,14 +194,15 @@ def update_titlescreen(gamestate: GameState) -> None:
                     gamestate.maps.select_prev()
                 case pygame.K_RIGHT:
                     gamestate.maps.select_next()
+
 def draw_titlescreen(screen: pygame.Surface, gamestate: GameState):
     # screen.fill((0,0,0))
     screen.blit(gamestate.titlebackground, (0, 0))
-    quitButton = gamestate.font.render("Quit", True, (255,255,255), (0,0,0))
+    #quitButton = gamestate.font.render("Quit", True, (255,255,255), (0,0,0))
     chooseMapButton = gamestate.font.render(gamestate.maps.get_selected_map().title, True, (255,255,255), (0,0,0))
     welcome = gamestate.font.render("Welcome!", True, (255,255,255), (0,0,0))
-    pressSpaceToPlay = gamestate.font.render("Press Enter to Play!", True, (255,255,255), (0,0,0))
-    screen.blit(quitButton,(400,750))
+    pressSpaceToPlay = gamestate.font.render("Press Space to Play!", True, (255,255,255), (0,0,0))
+    #screen.blit(quitButton,(400,750))
     screen.blit(welcome, (250, 100))
     screen.blit(chooseMapButton, (300,600))
     screen.blit(pressSpaceToPlay, (350, 500))
@@ -216,7 +218,6 @@ def main():
     
     print(gamestate)
 
-    
     fps = FPS
     fpsClock = pygame.time.Clock()
 
