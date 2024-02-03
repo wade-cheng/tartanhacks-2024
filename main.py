@@ -84,7 +84,7 @@ def draw_game(screen: pygame.Surface, gamestate: GameState):
                 effect_text = gamestate.font.render("nice!", True, (255, 100, 100))
             case 4:
                 effect_text = gamestate.font.render("good", True, (50, 50, 200))
-        screen.blit(effect_text, (500, 150))
+        screen.blit(effect_text, (400, 150))
         gamestate.hitEffectCounter += 1
 
     
@@ -111,8 +111,8 @@ def draw_game(screen: pygame.Surface, gamestate: GameState):
     score_text = gamestate.font.render("Score: " + str(gamestate.score), True, (255, 255, 255))#, (0,0,0))
     combo_text = gamestate.font.render("Combo: " + str(round(gamestate.combo,2)), True, (255, 255, 255))#, (0,0,0))
     pressEscToLeave = gamestate.font.render("Press the 'Esc' Key to Escape", True, (255,255,255))
-    screen.blit(score_text, (750, 50))
-    screen.blit(combo_text, (750, 150))
+    screen.blit(score_text, (650, 50))
+    screen.blit(combo_text, (650, 150))
     screen.blit(pressEscToLeave, (400, 600))
     
 
@@ -180,11 +180,13 @@ def draw_titlescreen(screen: pygame.Surface, gamestate: GameState):
     welcome = gamestate.font.render("Welcome!", True, (255,255,255), (0,0,0))
     pressSpaceToPlay = gamestate.font.render("Press Enter to Play!", True, (255,255,255), (0,0,0))
     #screen.blit(quitButton,(400,750))
+    titlegoose = pygame.image.load("assets/squashgood.png")
     screen.blit(welcome, (250, 100))
     screen.blit(chooseMapButton, (300,600))
-    screen.blit(pressSpaceToPlay, (350, 500))
+    screen.blit(pressSpaceToPlay, (325, 375))
     screen.blit(gamestate.leftarrow, (gamestate.LARROW_X, gamestate.ARROW_Y))
     screen.blit(gamestate.rightarrow, (gamestate.RARROW_X, gamestate.ARROW_Y))
+    screen.blit(titlegoose, (325, 325))
     pygame.display.update()
 
 def main():
