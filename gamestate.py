@@ -26,6 +26,8 @@ class GameState:
         self.comboCounter = COMBO_EFFECT_TIMER + 1
 
         self.background = pygame.image.load("assets/windows.png")
+        self.leftarrow = pygame.image.load("assets/left_arrow_93x70.png")
+        self.rightarrow = pygame.image.load("assets/right_arrow_93x70.png")
         
         # rendered_hitcircle_locs: a list of the x-positions of all the hitcircles to be rendered. can be off screen.
         self.rendered_hitcircles: list[Note] = []

@@ -69,6 +69,8 @@ class Map:
             match key:
                 case "author":
                     self.author: str = value
+                case "title":
+                    self.title: str = value
                 case "audio path":
                     self.audio: pygame.mixer.Sound = pygame.mixer.Sound(f"{maps_folderpath}/{value}")
                 case "first note offset":
