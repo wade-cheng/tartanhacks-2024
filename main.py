@@ -52,7 +52,7 @@ def main():
 
     pygame.init()
 
-    fps = 60.0
+    fps = FPS
     fpsClock = pygame.time.Clock()
 
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT), flags=0, vsync=1)

@@ -19,7 +19,7 @@ def notesstream( gamestate: GameState):
 
     pixels_between_beat : int = (SCREEN_WIDTH - SQUASHER_BAR_X) / BEATS_ON_SCREEN 
 
-    pixels_per_timestep : int = m.bpm * (SCREEN_WIDTH - SQUASHER_BAR_X) / (BEATS_ON_SCREEN * 3600) 
+    pixels_per_timestep : int = m.bpm * (SCREEN_WIDTH - SQUASHER_BAR_X) / (BEATS_ON_SCREEN * 60 * FPS) 
 
     offset : float = (t * 60) * pixels_per_timestep
 

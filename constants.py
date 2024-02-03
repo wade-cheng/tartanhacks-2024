@@ -1,5 +1,6 @@
 BG_COLOR = (255, 255, 255)
 SCREEN_WIDTH, SCREEN_HEIGHT = 1000, 800
+FPS = 60
 
 BEATS_ON_SCREEN = 12 # how far ahead do we want to display notes
 SQUASHER_BAR_X = SCREEN_WIDTH * 0.2 # width of goose and also the hit bar 
