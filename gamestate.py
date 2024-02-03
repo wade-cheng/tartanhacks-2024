@@ -41,9 +41,9 @@ class MapHolder:
     def __init__(self):
         print(f"discovered maps {os.listdir('maps/')}")
         self.map_idx = 0
-        self.map_list = []
+        self.map_list: list[Map] = []
         for map in os.listdir("maps"):
-            self.map_list.append(f"maps/{map}")
+            self.map_list.append(Map(f"maps/{map}"))
     
     def get_selected_map(self) -> Map:
         return self.map_list[self.map_idx]

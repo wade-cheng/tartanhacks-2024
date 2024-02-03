@@ -18,17 +18,7 @@ def get_closest_note(gamestate : GameState) -> Note :
     return minim
 
 
-def update_game(dt, gamestate: GameState):
-    """
-    Update game. Called once per frame.
-    dt is the amount of time passed since last frame.
-    If you want to have constant apparent movement no matter your framerate,
-    what you can do is something like
-
-    x += v * dt
-
-    and this will scale your velocity based on time. Extend as necessary."""
-
+def update_game(gamestate: GameState):
     notesstream(gamestate)
     for event in pygame.event.get():
         if event.type == QUIT:
@@ -125,20 +115,29 @@ def drawGoose(screen: pygame.Surface, gamestate: GameState): # draws the goose i
 def playMusic(sound: pygame.mixer.Sound):
     pygame.mixer.find_channel().play(sound)
 
-def play_map(gamestate: GameState):
-    pass
+def play_map(gamestate: GameState, screen, fpsClock, fps):
+    playMusic(gamestate.maps.get_selected_map().audio)
 
-def start_screen(font: pygame.font) -> None:
-    pygame.font.init()
-    intro_screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT), flags=0, vsync=1)
-    pygame.display.set_caption("Goose Rhythm Game")
-    intro_screen.fill((0,0,0))
-    quitButton = font.render("Quit", True, (255,255,255), (0,0,0))
-    chooseMapButton = font.render("Choose Map", True, (255,255,255), (0,0,0))
-    welcome = font.render("Welcome!", True, (255,255,255), (0,0,0))
-    intro_screen.blit(quitButton,(400,600))
-    intro_screen.blit(welcome, (250, 100))
-    intro_screen.blit(chooseMapButton, (300,600))
+    while gamestate.playing:
+        update_game(gamestate)
+        draw_game(screen, gamestate)
+        fpsClock.tick(fps)
+
+def update_titlescreen(gamestate: GameState) -> None:
+    for event in pygame.event.get():
+        if event.type == QUIT:
+            gamestate.playing = False
+        elif event.type == pygame.KEYDOWN:
+            gamestate.entered_map = True
+
+def draw_titlescreen(screen: pygame.Surface, gamestate: GameState):
+    screen.fill((0,0,0))
+    quitButton = gamestate.font.render("Quit", True, (255,255,255), (0,0,0))
+    chooseMapButton = gamestate.font.render("Choose Map", True, (255,255,255), (0,0,0))
+    welcome = gamestate.font.render("Welcome!", True, (255,255,255), (0,0,0))
+    screen.blit(quitButton,(400,600))
+    screen.blit(welcome, (250, 100))
+    screen.blit(chooseMapButton, (300,600))
     pygame.display.update()
 
 def main():
@@ -146,9 +145,7 @@ def main():
     pygame.font.init()
 
     gamestate = GameState()
-    start_screen(gamestate.font)
     print(gamestate)
-    playMusic(gamestate.map.audio)
 
     
     fps = FPS
@@ -162,15 +159,15 @@ def main():
 
     #goose = pygame.image.load(), upload goose images to repo to pull
 
-    dt = 1 / fps
     while gamestate.playing:
-        update_game(dt, gamestate)
+        update_titlescreen(gamestate)
         
         if gamestate.entered_map:
-            play_map(gamestate)
+            print("yeah")
+            play_map(gamestate, screen, fpsClock, fps)
         
-        draw_game(screen, gamestate)
-        dt = fpsClock.tick(fps)
+        draw_titlescreen(screen, gamestate)
+        fpsClock.tick(fps)
 
 
 
