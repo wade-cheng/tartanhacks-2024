@@ -152,7 +152,8 @@ def start_screen(font: pygame.font, screen: pygame.Surface) -> None:
 
     pygame.font.init()
     #intro_screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT), flags=0, vsync=1)
-    pygame.display.set_caption("Loose-y Goose-y")
+    pygame.display.set_caption("Loosey Goosey")
+    pygame.image.load("assets/title.png")
     screen.fill((0,0,0))
     quitButton = font.render("Quit", True, (255,255,255), (0,0,0))
     chooseMapButton = font.render("Choose Map", True, (255,255,255), (0,0,0))
@@ -187,7 +188,8 @@ def update_titlescreen(gamestate: GameState) -> None:
             gamestate.entered_map = True
 
 def draw_titlescreen(screen: pygame.Surface, gamestate: GameState):
-    screen.fill((0,0,0))
+    # screen.fill((0,0,0))
+    screen.blit(gamestate.titlebackground, (0, 0))
     quitButton = gamestate.font.render("Quit", True, (255,255,255), (0,0,0))
     chooseMapButton = gamestate.font.render(gamestate.maps.get_selected_map().title, True, (255,255,255), (0,0,0))
     welcome = gamestate.font.render("Welcome!", True, (255,255,255), (0,0,0))
