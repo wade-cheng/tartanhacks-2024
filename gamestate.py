@@ -28,6 +28,7 @@ class GameState:
         self.comboCounter = COMBO_EFFECT_TIMER + 1
 
         self.background = pygame.image.load("assets/windows.png")
+        self.titlebackground = pygame.image.load("assets/title.png")
         self.leftarrow = pygame.image.load("assets/left_arrow_93x70.png")
         self.rightarrow = pygame.image.load("assets/right_arrow_93x70.png")
         self.ARROW_Y = 650
@@ -43,7 +44,7 @@ class GameState:
         # rendered_hitcircle_locs: a list of the x-positions of all the hitcircles to be rendered. can be off screen.
         self.rendered_hitcircles: list[Note] = []
         
-        self.startTime = time.time()
+        self.startTime = None
 
         self.maps: MapHolder = MapHolder()
         self.entered_map = False
@@ -51,7 +52,20 @@ class GameState:
         self.font = pygame.font.Font("assets/hero-speak.ttf", 42)
         self.titlefont = pygame.font.Font("assets/title-font.ttf", 72)
 
+    def reset_map_gamestate(self):
+        self.startTime = time.time()
 
+        self.gooseIndex = 0
+        self.gooseSquashedState = 0
+        self.gooseSquashedCounter = 0
+
+        self.score = 0
+        self.combo = 0
+
+        self.hitstate = 0
+        self.hitEffectCounter = 0
+        self.nextComboVal = 100
+        self.comboCounter = COMBO_EFFECT_TIMER + 1
 
 class MapHolder:
     def __init__(self):
@@ -64,6 +78,9 @@ class MapHolder:
     def get_selected_map(self) -> Map:
         return self.__map_list[self.__map_idx]
     
+    def select_prev (self) :
+        self.__map_idx = (self.__map_idx - 1) % len(self.__map_list)
+
     def select_next(self):
         self.__map_idx = (self.__map_idx + 1) % len(self.__map_list)
     
