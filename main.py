@@ -4,6 +4,7 @@ import pygame
 from pygame.locals import *
 from visualizer import *
 from PIL import Image
+import numpy 
 
 
 def get_closest_note(gamestate : GameState) -> Note :
@@ -35,7 +36,14 @@ def update(dt, gamestate: GameState):
         elif event.type == pygame.KEYDOWN:
             if event.key == pygame.K_SPACE:
                 closest = get_closest_note(gamestate)
-                closest.squashed = True
+                # if the user misses completely
+                if (abs(closest.x - SQUASHER_BAR_X) > ACCURACY_BUFFER):
+                    gamestate.combo = 0
+                else:
+                    scaled_error = (closest.x - SQUASHER_BAR_X)/ACCURACY_BUFFER * numpy.pi # to fit the domain of cosine
+                    score_scaling = 0.5 * (numpy.cos(scaled_error) + 1);
+                    gamestate.score += score_scaling * (gamestate.combo + 1) * 1
+                    closest.squashed = True
     
 
 def draw(screen: pygame.Surface, gamestate: GameState):
