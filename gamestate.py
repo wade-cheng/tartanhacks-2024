@@ -40,8 +40,8 @@ class GameState:
 class MapHolder:
     def __init__(self):
         print(f"discovered maps {os.listdir('maps/')}")
-        self.map_idx = 0
-        self.map_list = []
+        self.__map_idx = 0
+        self.__map_list = []
         for map in os.listdir("maps"):
             self.map_list.append(f"maps/{map}")
     

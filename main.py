@@ -129,17 +129,20 @@ def play_map(gamestate: GameState):
     pass
 
 def start_screen(font: pygame.font) -> None:
-    pygame.font.init()
-    intro_screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT), flags=0, vsync=1)
-    pygame.display.set_caption("Goose Rhythm Game")
-    intro_screen.fill((0,0,0))
-    quitButton = font.render("Quit", True, (255,255,255), (0,0,0))
-    chooseMapButton = font.render("Choose Map", True, (255,255,255), (0,0,0))
-    welcome = font.render("Welcome!", True, (255,255,255), (0,0,0))
-    intro_screen.blit(quitButton,(400,600))
-    intro_screen.blit(welcome, (250, 100))
-    intro_screen.blit(chooseMapButton, (300,600))
-    pygame.display.update()
+
+        pygame.font.init()
+        intro_screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT), flags=0, vsync=1)
+        imp = pygame.image.load("assets/title.png").convert()
+        intro_screen.blit(imp, (0, 0))
+        pygame.display.set_caption("Loosey Goosey")
+        intro_screen.fill((0,0,0))
+        quitButton = font.render("Quit", True, (255,255,255), (0,0,0))
+        chooseMapButton = font.render("Choose Map", True, (255,255,255), (0,0,0))
+        welcome = font.render("Welcome!", True, (255,255,255), (0,0,0))
+        intro_screen.blit(quitButton,(400,600))
+        intro_screen.blit(welcome, (250, 100))
+        intro_screen.blit(chooseMapButton, (300,600))
+        pygame.display.update()
 
 def main():
     pygame.init()
