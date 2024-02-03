@@ -19,12 +19,18 @@ def update(dt, gamestate: GameState):
             gamestate.playing = False
         elif event.type == -1: # a constant like PLAYER_MOVE_EVENT = pygame.USEREVENT + 1
             pass
-        elif event.type == pygame.MOUSEBUTTONDOWN:
-            x, y = pygame.mouse.get_pos()
         elif event.type == pygame.KEYDOWN:
             match event.key:
                 case pygame.K_SPACE:
                     print("pressed space")
+                case "W":
+                    print("pressed up")
+                case "A":
+                    print("pressed A")
+                case "S":
+                    print("pressed S")
+                case "D":
+                    print("pressed D")
 
 
 def draw(screen: pygame.Surface, gamestate: GameState):

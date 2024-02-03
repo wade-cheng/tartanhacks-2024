@@ -24,6 +24,7 @@ class GameState:
     def __init__(self, example_param: int=0) -> None:
         self.example_param = example_param
         self.playing = True
+        self.score = 0
         self.hitcircle = pygame.image.load('assets/hit_circle_basic.png')
         # rendered_hitcircle_locs: a list of the x-positions of all the hitcircles to be rendered. can be off screen.
         self.rendered_hitcircle_locs: list[float] = []
