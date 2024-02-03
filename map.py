@@ -19,6 +19,7 @@ class Note:
         else:
             screen.blit(self.sprite, (self.x - self.sprite_offset, NOTESTREAM_Y))
 
+
 class Notes:
     """data structure for efficient Note operations
     is a list of the Note class

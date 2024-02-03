@@ -18,7 +18,7 @@ def get_closest_note(gamestate : GameState) -> Note :
     return minim
 
 
-def update(dt, gamestate: GameState):
+def update_game(dt, gamestate: GameState):
     """
     Update game. Called once per frame.
     dt is the amount of time passed since last frame.
@@ -66,7 +66,7 @@ def update(dt, gamestate: GameState):
 
     
 
-def draw(screen: pygame.Surface, font, gamestate: GameState):
+def draw_game(screen: pygame.Surface, gamestate: GameState):
     """
     Draw things to the window. Called once per frame.
     """
@@ -75,13 +75,13 @@ def draw(screen: pygame.Surface, font, gamestate: GameState):
     if (gamestate.hitEffectCounter <= HIT_EFFECT_TIMER and gamestate.hitstate > 0):
         match gamestate.hitstate:
             case 1:
-                effect_text = font.render("perfect!!", True, (255, 255, 255))
+                effect_text = gamestate.font.render("perfect!!", True, (255, 255, 255))
             case 2:
-                effect_text = font.render("awesome!!", True, (100, 255, 100))
+                effect_text = gamestate.font.render("awesome!!", True, (100, 255, 100))
             case 3:
-                effect_text = font.render("nice!", True, (255, 100, 100))
+                effect_text = gamestate.font.render("nice!", True, (255, 100, 100))
             case 4:
-                effect_text = font.render("good", True, (50, 50, 200))
+                effect_text = gamestate.font.render("good", True, (50, 50, 200))
         screen.blit(effect_text, (500, 150))
         gamestate.hitEffectCounter += 1
 
@@ -92,8 +92,8 @@ def draw(screen: pygame.Surface, font, gamestate: GameState):
 
     pygame.draw.line(screen, color=(255, 255, 255), start_pos=(SQUASHER_BAR_X, NOTESTREAM_Y - 100), end_pos=(SQUASHER_BAR_X, NOTESTREAM_Y + 100), width=5)
 
-    score_text = font.render("Score: " + str(gamestate.score), True, (255, 255, 255))#, (0,0,0))
-    combo_text = font.render("Combo: " + str(round(gamestate.combo,2)), True, (255, 255, 255))#, (0,0,0))
+    score_text = gamestate.font.render("Score: " + str(gamestate.score), True, (255, 255, 255))#, (0,0,0))
+    combo_text = gamestate.font.render("Combo: " + str(round(gamestate.combo,2)), True, (255, 255, 255))#, (0,0,0))
     screen.blit(score_text, (800, 50))
     screen.blit(combo_text, (800, 150))
 
@@ -125,26 +125,28 @@ def drawGoose(screen: pygame.Surface, gamestate: GameState): # draws the goose i
 def playMusic(sound: pygame.mixer.Sound):
     pygame.mixer.find_channel().play(sound)
 
+def play_map(gamestate: GameState):
+    pass
+
 def start_screen(font: pygame.font) -> None:
-        pygame.font.init()
-        intro_screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT), flags=0, vsync=1)
-        pygame.display.set_caption("Goose Rhythm Game")
-        intro_screen.fill((0,0,0))
-        quitButton = font.render("Quit", True, (255,255,255), (0,0,0))
-        chooseMapButton = font.render("Choose Map", True, (255,255,255), (0,0,0))
-        welcome = font.render("Welcome!", True, (255,255,255), (0,0,0))
-        intro_screen.blit(quitButton,(400,600))
-        intro_screen.blit(welcome, (250, 100))
-        intro_screen.blit(chooseMapButton, (300,600))
-        pygame.display.update()
+    pygame.font.init()
+    intro_screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT), flags=0, vsync=1)
+    pygame.display.set_caption("Goose Rhythm Game")
+    intro_screen.fill((0,0,0))
+    quitButton = font.render("Quit", True, (255,255,255), (0,0,0))
+    chooseMapButton = font.render("Choose Map", True, (255,255,255), (0,0,0))
+    welcome = font.render("Welcome!", True, (255,255,255), (0,0,0))
+    intro_screen.blit(quitButton,(400,600))
+    intro_screen.blit(welcome, (250, 100))
+    intro_screen.blit(chooseMapButton, (300,600))
+    pygame.display.update()
 
 def main():
     pygame.init()
     pygame.font.init()
-    font = pygame.font.Font("assets/hero-speak.ttf", 42)
 
-    start_screen(font)
     gamestate = GameState()
+    start_screen(gamestate.font)
     print(gamestate)
     playMusic(gamestate.map.audio)
 
@@ -162,8 +164,12 @@ def main():
 
     dt = 1 / fps
     while gamestate.playing:
-        update(dt, gamestate)
-        draw(screen, font, gamestate)
+        update_game(dt, gamestate)
+        
+        if gamestate.entered_map:
+            play_map(gamestate)
+        
+        draw_game(screen, gamestate)
         dt = fpsClock.tick(fps)
 
 
