@@ -139,6 +139,17 @@ def start_screen(font: pygame.font, screen: pygame.Surface) -> None:
     # screen.blit(chooseMapButton, (300,600))
     pass
 
+    pygame.font.init()
+    #intro_screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT), flags=0, vsync=1)
+    pygame.display.set_caption("Loose-y Goose-y")
+    screen.fill((0,0,0))
+    quitButton = font.render("Quit", True, (255,255,255), (0,0,0))
+    chooseMapButton = font.render("Choose Map", True, (255,255,255), (0,0,0))
+    welcome = font.render("Welcome!", True, (255,255,255), (0,0,0))
+    screen.blit(quitButton,(400,600))
+    screen.blit(welcome, (250, 100))
+    screen.blit(chooseMapButton, (300,600))
+    
 def play_map(gamestate: GameState, screen, fpsClock, fps):
     playMusic(gamestate.maps.get_selected_map().audio)
 
@@ -184,7 +195,6 @@ def main():
     pygame.display.update()
 
     #goose = pygame.image.load(), upload goose images to repo to pull
-
     while gamestate.playing:
         update_titlescreen(gamestate)
         
