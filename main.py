@@ -84,7 +84,7 @@ def draw_game(screen: pygame.Surface, gamestate: GameState):
                 effect_text = gamestate.font.render("nice!", True, (255, 100, 100))
             case 4:
                 effect_text = gamestate.font.render("good", True, (50, 50, 200))
-        screen.blit(effect_text, (500, 150))
+        screen.blit(effect_text, (400, 150))
         gamestate.hitEffectCounter += 1
 
     
@@ -111,8 +111,8 @@ def draw_game(screen: pygame.Surface, gamestate: GameState):
     score_text = gamestate.font.render("Score: " + str(gamestate.score), True, (255, 255, 255))#, (0,0,0))
     combo_text = gamestate.font.render("Combo: " + str(round(gamestate.combo,2)), True, (255, 255, 255))#, (0,0,0))
     pressEscToLeave = gamestate.font.render("Press the 'Esc' Key to Escape", True, (255,255,255))
-    screen.blit(score_text, (750, 50))
-    screen.blit(combo_text, (750, 150))
+    screen.blit(score_text, (650, 50))
+    screen.blit(combo_text, (650, 150))
     screen.blit(pressEscToLeave, (400, 600))
     
 
