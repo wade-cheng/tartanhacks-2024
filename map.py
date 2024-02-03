@@ -1,5 +1,6 @@
 import pygame
 from pygame.locals import *
+from constants import *
 
 pygame.mixer.init()
 
@@ -7,6 +8,16 @@ class Note:
     def __init__(self):
         self.squashed = False
         self.x = -10000
+        self.sprite = pygame.image.load('assets/hit_circle_basic.png')
+        self.squashed_sprite = pygame.image.load('assets/hit_circle_basic_squashed.png')
+        self.sprite_offset = 40 # should be half of sprite width
+        self.squashed_sprite_offset = 40 # should be half of squashed sprite width
+
+    def draw(self, screen: pygame.Surface):
+        if self.squashed:
+            screen.blit(self.squashed_sprite, (self.x - self.squashed_sprite_offset, NOTESTREAM_Y))
+        else:
+            screen.blit(self.sprite, (self.x - self.sprite_offset, NOTESTREAM_Y))
 
 class Notes:
     """data structure for efficient Note operations

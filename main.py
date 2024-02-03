@@ -36,9 +36,6 @@ def update(dt, gamestate: GameState):
                 closest = get_closest_note(gamestate)
                 closest.squashed = True
     
-    closest = get_closest_note(gamestate)
-    closest.squashed = True
-
 
 def draw(screen: pygame.Surface, gamestate: GameState):
     """
@@ -48,13 +45,12 @@ def draw(screen: pygame.Surface, gamestate: GameState):
     screen.blit(gamestate.background, (0, 0))
 
     for hitcircle in gamestate.rendered_hitcircles:
-        if hitcircle.squashed:
-            screen.blit(gamestate.squashed_hitcircle, (hitcircle.x, NOTESTREAM_Y))
-        else:
-            screen.blit(gamestate.hitcircle, (hitcircle.x, NOTESTREAM_Y))
-
+        hitcircle.draw(screen)
 
     drawGoose(screen, gamestate)
+
+    pygame.draw.line(screen, color=(0,0,0), start_pos=(SQUASHER_BAR_X, NOTESTREAM_Y - 20), end_pos=(SQUASHER_BAR_X, NOTESTREAM_Y + 60), width=10)
+
     pygame.display.update()
     
 def drawGoose(screen: pygame.Surface, gamestate: GameState): # draws the goose in frames and includes user input
