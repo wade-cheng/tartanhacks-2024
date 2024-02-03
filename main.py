@@ -175,7 +175,6 @@ def update_titlescreen(gamestate: GameState) -> None:
             gamestate.playing = False
         elif event.type == pygame.MOUSEBUTTONDOWN:
             cursor_x, cursor_y = pygame.mouse.get_pos()
-            print(cursor_x, cursor_y)
             print(gamestate.leftarrow.get_rect())
             if gamestate.LARROW_RECT.collidepoint(cursor_x, cursor_y):
                 gamestate.maps.select_next()
