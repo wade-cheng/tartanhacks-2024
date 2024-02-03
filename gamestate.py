@@ -22,6 +22,8 @@ class GameState:
 
         self.hitstate = 0
         self.hitEffectCounter = 0
+        self.nextComboVal = 100
+        self.comboCounter = COMBO_EFFECT_TIMER + 1
 
         self.background = pygame.image.load("assets/windows.png")
         
