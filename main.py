@@ -35,6 +35,7 @@ def update_game(gamestate: GameState):
     for event in pygame.event.get():
         if event.type == QUIT:
             gamestate.entered_map = False
+            gamestate.playing = False
             pygame.mixer.pause()
         elif event.type == pygame.KEYDOWN:
         
@@ -172,7 +173,7 @@ def play_map(gamestate: GameState, screen, fpsClock, fps):
 
 def update_titlescreen(gamestate: GameState) -> None:
     for event in pygame.event.get():
-        if event.type == QUIT:
+        if event.type  == QUIT:
             gamestate.playing = False
         elif event.type == pygame.MOUSEBUTTONDOWN:
             cursor_x, cursor_y = pygame.mouse.get_pos()
