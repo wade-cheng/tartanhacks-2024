@@ -121,9 +121,9 @@ def main():
     gamestate = GameState()
     print(gamestate)
 
-	pygame.init()
-	pygame.font.init()
-	font = pygame.font.Font(None, 40)
+    pygame.init()
+    pygame.font.init()
+    font = pygame.font.Font(None, 40)
 
     fps = FPS
     fpsClock = pygame.time.Clock()
