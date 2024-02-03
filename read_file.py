@@ -1,3 +1,4 @@
+import pygame 
 with open("./maps/testcase_small/map.cfg") as f:
   fileAccess = f.readlines()
   # print(fileAccess)
@@ -20,7 +21,7 @@ class Map:
     def __init__(self, maps_filepath: str):
         # pass in file args
         self.author: str = maps_filepath[1]
-        self.audio: Sound = pygame.mixer.Sound(maps_filepath[4])
+        self.audio: pygame.mixer.Sound = pygame.mixer.Sound(maps_filepath[4])
         self.notes: Notes = Notes(maps_filepath)
         self.bpm: int = maps_filepath[7]
 
