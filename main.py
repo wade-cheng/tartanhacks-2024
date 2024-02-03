@@ -35,7 +35,6 @@ def draw(screen: pygame.Surface, gamestate: GameState):
 
     pygame.display.update()
 
-
 def main():
     gamestate = GameState()
 
@@ -45,9 +44,12 @@ def main():
     fpsClock = pygame.time.Clock()
 
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT), flags=0, vsync=1)
+    pygame.display.set_caption("Goose Rhythm Game")
     # screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT), flags=pygame.SCALED, vsync=1)
     screen.fill(BG_COLOR)
     pygame.display.update()
+
+    #goose = pygame.image.load(), upload goose images to repo to pull
 
     dt = 1 / fps
     while gamestate.playing:
