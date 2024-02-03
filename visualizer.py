@@ -29,7 +29,7 @@ def notesstream( gamestate: GameState):
         curr_loc = start_loc - offset
         if (notes[i] is not None):
             notes[i].x = curr_loc
-            if (curr_loc >= -50 and curr_loc <= SCREEN_WIDTH + 50): # if visible (with margin of error) TODO: change 50 to width of hit_circle
+            if (curr_loc >= -EGG_WIDTH and curr_loc <= SCREEN_WIDTH + EGG_WIDTH): # if visible (with margin of error) 
                 gamestate.rendered_hitcircles.append(notes[i]) 
 
 
