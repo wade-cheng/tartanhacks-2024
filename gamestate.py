@@ -28,6 +28,7 @@ class GameState:
         self.comboCounter = COMBO_EFFECT_TIMER + 1
 
         self.background = pygame.image.load("assets/windows.png")
+        self.titlebackground = pygame.image.load("assets/title.png")
         self.leftarrow = pygame.image.load("assets/left_arrow_93x70.png")
         self.rightarrow = pygame.image.load("assets/right_arrow_93x70.png")
         self.ARROW_Y = 650

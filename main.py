@@ -187,7 +187,7 @@ def update_titlescreen(gamestate: GameState) -> None:
 
 def draw_titlescreen(screen: pygame.Surface, gamestate: GameState):
     # screen.fill((0,0,0))
-    pygame.image.load("assets/windows.png")
+    screen.blit(gamestate.titlebackground, (0, 0))
     quitButton = gamestate.font.render("Quit", True, (255,255,255), (0,0,0))
     chooseMapButton = gamestate.font.render(gamestate.maps.get_selected_map().title, True, (255,255,255), (0,0,0))
     welcome = gamestate.font.render("Welcome!", True, (255,255,255), (0,0,0))
