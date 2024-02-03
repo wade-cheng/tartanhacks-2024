@@ -58,7 +58,7 @@ def update_game(gamestate: GameState):
                     scaled_error = (press_x - SQUASHER_BAR_X)/ACCURACY_BUFFER * numpy.pi # to fit the domain of cosine
                     score_scaling = 0.5 * (numpy.cos(scaled_error) + 1)
                     gamestate.score += int(score_scaling * (gamestate.combo + 1) * 100)
-                    gamestate.combo += score_scaling * 10
+                    gamestate.combo += int(score_scaling * 10)
                     closest.squashed = True
                     gamestate.hitstate = int(abs(scaled_error)) + 1 # theoretically between 1 and 4 
                     gamestate.hitEffectCounter = 0
