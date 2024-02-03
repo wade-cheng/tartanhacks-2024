@@ -42,15 +42,18 @@ def update(dt, gamestate: GameState):
             '''
             if event.key == pygame.K_SPACE:
                 closest = get_closest_note(gamestate)
+                press_x = 0
                 if closest == None:
-                    break
+                    press_x = 9999
+                else:
+                    press_x = closest.x
                 # if the user misses completely
-                if (abs(closest.x - SQUASHER_BAR_X) > ACCURACY_BUFFER):
+                if (abs(press_x - SQUASHER_BAR_X) > ACCURACY_BUFFER):
                     gamestate.combo = 0
                     gamestate.gooseSquashedCounter = 0
                     gamestate.gooseSquashedState = 2
                 else:
-                    scaled_error = (closest.x - SQUASHER_BAR_X)/ACCURACY_BUFFER * numpy.pi # to fit the domain of cosine
+                    scaled_error = (press_x - SQUASHER_BAR_X)/ACCURACY_BUFFER * numpy.pi # to fit the domain of cosine
                     score_scaling = 0.5 * (numpy.cos(scaled_error) + 1)
                     gamestate.score += int(score_scaling * (gamestate.combo + 1) * 100)
                     gamestate.combo += score_scaling * 10
