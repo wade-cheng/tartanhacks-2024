@@ -1,6 +1,7 @@
 from gamestate import GameState
 from constants import *
 import pygame
+import wave
 from pygame.locals import *
 from visualizer import *
 from PIL import Image
@@ -100,9 +101,18 @@ def drawGoose(screen: pygame.Surface, gamestate: GameState): # draws the goose i
 
     screen.blit(imageToDisplay, (0, GOOSE_Y))  
 
+def playMusic(song):
+    pygame.mixer.quit
+    file_wav = wave.open(song)
+    #frequency = file_wav.getframerate()
+    pygame.mixer.init(frequency=120)
+    pygame.mixer.music.load(song)
+    pygame.mixer.music.play(1)
+
 def main():
     gamestate = GameState()
     print(gamestate)
+    playMusic("maps/testcase_small/quacking.wav")
 
     pygame.init()
     pygame.font.init()
