@@ -56,7 +56,6 @@ def draw(screen: pygame.Surface, gamestate: GameState):
 def drawGoose(screen: pygame.Surface, gamestate: GameState): # draws the goose in frames and includes user input
     gamestate.gooseIndex = (gamestate.gooseIndex + 1) % len(gamestate.gooseArray)   
 
-    gamestate.gooseIndex = (gamestate.gooseIndex + 1) % len(4)   
     if gamestate.gooseSquashedBad:
         imageToDisplay = "bad.png"
     elif gamestate.gooseSquashedGood:
