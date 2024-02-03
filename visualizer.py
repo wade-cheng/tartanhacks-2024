@@ -15,19 +15,19 @@ class Notes:
 
     def other methods idk
 """
-class Map:
-    def __init__(self, mapfolder_filepath: str):
-        file = open(mapfolder_filepath, "r")
-        file.readLine()
-        self.author: str = file.readLine()
-        file.readLine()
-        file.readLine()
-        self.bpm: int = file.readLine()
-        self.audio: pygame.mixer.Sound = pygame.mixer.Sound(file.readLine())
-        self.notes: list[bool] = file.readLine()
+# class Map:
+#     def __init__(self, mapfolder_filepath: str):
+#         file = open(mapfolder_filepath, "r")
+#         file.readLine()
+#         self.author: str = file.readLine()
+#         file.readLine()
+#         file.readLine()
+#         self.bpm: int = file.readLine()
+#         self.audio: pygame.mixer.Sound = pygame.mixer.Sound(file.readLine())
+#         self.notes: list[bool] = file.readLine()
         
 
-        file.close()
+#         file.close()
 
 # def notes_arr (notes: list[bool]):
 #     leng = len(notes)
