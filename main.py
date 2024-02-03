@@ -30,6 +30,12 @@ def update(dt, gamestate: GameState):
         #         if (abs(SQUASHER_BAR_X - )):
         #             gamestate.score += 1
         #         else:
+        elif event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_SPACE:
+                note_x = gamestate.re
+                # if (abs(GOOSE_BUFFER - )):
+                #     gamestate.score += 1
+                # else:
 
 
 def draw(screen: pygame.Surface, gamestate: GameState):
