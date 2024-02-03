@@ -41,7 +41,8 @@ def update_game(gamestate: GameState):
             if event.key == K_ESCAPE:
                 gamestate.entered_map = False
                 pygame.mixer.pause()
-            if event.key == pygame.K_SPACE:
+            # if event.key == pygame.K_SPACE:
+            else:
                 closest = get_closest_note(gamestate)
                 press_x = 0
                 if closest == None:
